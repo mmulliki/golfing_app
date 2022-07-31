@@ -1,6 +1,8 @@
 package com.example.golfingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,25 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private int currentScore = 0;
     private int currentHole = 1;
     private final String TEXTVIEW_HOLE_ID = "textViewHole";
+    private RecyclerView recyclerViewScoreCard;
 
-    private TextView textViewHole1;
-    private TextView textViewHole2;
-    private TextView textViewHole3;
-    private TextView textViewHole4;
-    private TextView textViewHole5;
-    private TextView textViewHole6;
-    private TextView textViewHole7;
-    private TextView textViewHole8;
-    private TextView textViewHole9;
-    private TextView textViewHole10;
-    private TextView textViewHole11;
-    private TextView textViewHole12;
-    private TextView textViewHole13;
-    private TextView textViewHole14;
-    private TextView textViewHole15;
-    private TextView textViewHole16;
-    private TextView textViewHole17;
-    private TextView textViewHole18;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,25 +35,8 @@ public class MainActivity extends AppCompatActivity {
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonSubtract = findViewById(R.id.buttonSubtract);
         textViewCurrentHole = findViewById(R.id.textViewCurrentHole);
+        recyclerViewScoreCard = findViewById(R.id.recyclerViewScoreCard);
 
-        textViewHole1 = findViewById(R.id.textViewHole1);
-        textViewHole2 = findViewById(R.id.textViewHole2);
-        textViewHole3 = findViewById(R.id.textViewHole3);
-        textViewHole4 = findViewById(R.id.textViewHole4);
-        textViewHole5 = findViewById(R.id.textViewHole5);
-        textViewHole6 = findViewById(R.id.textViewHole6);
-        textViewHole7 = findViewById(R.id.textViewHole7);
-        textViewHole8 = findViewById(R.id.textViewHole8);
-        textViewHole9 = findViewById(R.id.textViewHole9);
-        textViewHole10 = findViewById(R.id.textViewHole10);
-        textViewHole11 = findViewById(R.id.textViewHole11);
-        textViewHole12 = findViewById(R.id.textViewHole12);
-        textViewHole13 = findViewById(R.id.textViewHole13);
-        textViewHole14 = findViewById(R.id.textViewHole14);
-        textViewHole15 = findViewById(R.id.textViewHole15);
-        textViewHole16 = findViewById(R.id.textViewHole16);
-        textViewHole17 = findViewById(R.id.textViewHole17);
-        textViewHole18 = findViewById(R.id.textViewHole18);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
