@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Golfing app</string>
+    <string name="editTextHint">--</string>
+    <string name="buttonSaveName">Save</string>
+    <string name="textViewCurrentHole">0</string>
+    <string name="buttonAddFigure">+</string>
+    <string name="buttonSubtractFigure">-</string>
+    <string name="hole_1">1</string>
+    <string name="hole_2">2</string>
+    <string name="hole_3">3</string>
+    <string name="hole_4">4</string>
+    <string name="hole_5">5</string>
+    <string name="hole_6">6</string>
+    <string name="hole_7">7</string>
+    <string name="hole_8">8</string>
+    <string name="hole_9">9</string>
+    <string name="hole_10">10</string>
+    <string name="hole_11">11</string>
+    <string name="hole_12">12</string>
+    <string name="hole_13">13</string>
+    <string name="hole_14">14</string>
+    <string name="hole_15">15</string>
+    <string name="hole_16">16</string>
+    <string name="hole_17">17</string>
+    <string name="hole_18">18</string>
+</resources>
