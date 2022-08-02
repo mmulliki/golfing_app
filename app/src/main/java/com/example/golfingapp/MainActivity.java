@@ -1,11 +1,15 @@
 package com.example.golfingapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -36,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
         buttonSubtract = findViewById(R.id.buttonSubtract);
         textViewCurrentHole = findViewById(R.id.textViewCurrentHole);
         recyclerViewScoreCard = findViewById(R.id.recyclerViewScoreCard);
-
+        recyclerViewScoreCard.setLayoutManager(new LinearLayoutManager(this));
+        ScoreAdapter scoreAdapter = new ScoreAdapter();
+        recyclerViewScoreCard.setAdapter(scoreAdapter);
+        scoreAdapter.setScoreList(roundScore);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +88,55 @@ public class MainActivity extends AppCompatActivity {
         Log.d("changeCurrentScore", "Size of array: " + roundScore.size());
         for (int i = 1; i < roundScore.size(); i++) {
             Log.d("saveScore", "Hole " + i + ": " + roundScore.get(i));
+        }
+    }
+
+    private static class ScoreHolder extends RecyclerView.ViewHolder {
+
+        TextView label;
+        TextView score;
+
+        public ScoreHolder(@NonNull View itemView) {
+            super(itemView);
+
+            label = itemView.findViewById(R.id.textViewLabel);
+            score = itemView.findViewById(R.id.textViewScore);
+        }
+
+        public void bindHoleScore(Integer score, int position) {
+            position++;
+
+            label.setText(String.valueOf(position));
+            this.score.setText(String.valueOf(score));
+        }
+    }
+
+    private static class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
+
+        private ArrayList<Integer> scoreList;
+
+        public void setScoreList(ArrayList<Integer> scoreList) {
+            this.scoreList = scoreList;
+        }
+
+        @NonNull
+        @Override
+        public ScoreHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
+            View object = inflater.inflate(R.layout.hole_layout, parent, false);
+
+            return new ScoreHolder(object);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ScoreHolder holder, int position) {
+            holder.bindHoleScore(scoreList.get(position), position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return scoreList.size();
         }
     }
 
