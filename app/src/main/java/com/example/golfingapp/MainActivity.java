@@ -2,6 +2,7 @@ package com.example.golfingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,15 +36,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        for (int i = 0; i < 18; i++) {
+            roundScore.add(0);
+        }
+
         buttonSaveScore = findViewById(R.id.buttonSaveScore);
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonSubtract = findViewById(R.id.buttonSubtract);
         textViewCurrentHole = findViewById(R.id.textViewCurrentHole);
+
         recyclerViewScoreCard = findViewById(R.id.recyclerViewScoreCard);
-        recyclerViewScoreCard.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewScoreCard.setLayoutManager(layoutManager);
         ScoreAdapter scoreAdapter = new ScoreAdapter();
         recyclerViewScoreCard.setAdapter(scoreAdapter);
         scoreAdapter.setScoreList(roundScore);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
+                layoutManager.getOrientation());
+        recyclerViewScoreCard.addItemDecoration(dividerItemDecoration);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,9 +117,21 @@ public class MainActivity extends AppCompatActivity {
 
         public void bindHoleScore(Integer score, int position) {
             position++;
+            if (position < 10) {
+                String tempPosition = " " + position;
+                label.setText(tempPosition);
 
-            label.setText(String.valueOf(position));
-            this.score.setText(String.valueOf(score));
+                String tempScore = " " + score;
+                this.score.setText(tempScore);
+            } else {
+                label.setText(String.valueOf(position));
+                if (score < 10) {
+                    String tempString = " " + score;
+                    this.score.setText(tempString);
+                } else {
+                    this.score.setText(String.valueOf(score));
+                }
+            }
         }
     }
 
