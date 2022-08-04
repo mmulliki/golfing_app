@@ -2,6 +2,8 @@ package com.example.golfingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -49,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
         buttonSubtract = findViewById(R.id.buttonSubtract);
         textViewCurrentHole = findViewById(R.id.textViewCurrentHole);
 
+        //Set up ViewModel
+        ScoreViewModel scoreViewModel = new ViewModelProvider(this)
+                .get(ScoreViewModel.class);
+
         //Front nine RecyclerView
         recyclerViewScoreCard = findViewById(R.id.recyclerViewScoreCard);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(9,
@@ -56,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewScoreCard.setLayoutManager(layoutManager);
         ScoreAdapter scoreAdapter = new ScoreAdapter();
         recyclerViewScoreCard.setAdapter(scoreAdapter);
-        scoreAdapter.setScoreList(frontNine, backNine);
+        scoreAdapter.setScoreList(scoreViewModel.frontNineScores);
 
         //Back nine RecyclerView
         GridLayoutManager layoutManagerBackNine = new GridLayoutManager(this, 9);
@@ -64,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewBackNine = findViewById(R.id.recyclerViewBackNine);
         recyclerViewBackNine.setLayoutManager(layoutManagerBackNine);
         recyclerViewBackNine.setAdapter(backNineAdapter);
-        backNineAdapter.setScoreList(backNine);
+//        backNineAdapter.setScoreList(backNine);
+        backNineAdapter.setScoreList(scoreViewModel.getBackNineScores());
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
         private ArrayList<Integer> frontNine;
 
-        public void setScoreList(ArrayList<Integer> frontNine, ArrayList<Integer> backNine) {
+        public void setScoreList(ArrayList<Integer> frontNine) {
             this.frontNine = frontNine;
         }
 
