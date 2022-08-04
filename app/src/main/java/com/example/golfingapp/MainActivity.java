@@ -2,9 +2,7 @@ package com.example.golfingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -24,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonSubtract;
     private TextView textViewCurrentHole;
     private int currentScore = 0;
-    private int currentHole = 1;
+    private int currentHole = 0;
     private RecyclerView recyclerViewScoreCard;
     private RecyclerView recyclerViewBackNine;
 
@@ -70,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSaveScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveScore(view);
+                saveScore(view, scoreViewModel, scoreAdapter);
             }
         });
     }
@@ -86,11 +84,21 @@ public class MainActivity extends AppCompatActivity {
         updateUiCurrentScore();
     }
 
-    public void saveScore(View view) {
+    public void saveScore(View view, ScoreViewModel scoreViewModel,
+                          ScoreAdapter scoreAdapter) {
+        scoreViewModel.addScore(currentScore, currentHole);
+
         currentScore = 0;
+        currentHole++;
         updateUiCurrentScore();
 
-        updateUiScoreCard();
+//        updateUiScoreCard(scoreViewModel, scoreAdapter);
+    }
+
+    private void updateUiScoreCard(ScoreViewModel scoreViewModel,
+                                   ScoreAdapter scoreAdapter) {
+        scoreAdapter.setScoreList(scoreViewModel.getScores());
+
     }
 
     private static class ScoreHolder extends RecyclerView.ViewHolder {
@@ -154,9 +162,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void updateUiScoreCard() {
-
-    }
 
     public void updateUiCurrentScore() {
         textViewCurrentHole.setText(String.valueOf(currentScore));
