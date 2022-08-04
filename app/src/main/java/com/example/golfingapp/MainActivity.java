@@ -61,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
         ScoreAdapter scoreAdapter = new ScoreAdapter();
         recyclerViewScoreCard.setAdapter(scoreAdapter);
         scoreAdapter.setScoreList(frontNine, backNine);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
-                layoutManager.getOrientation());
-        recyclerViewScoreCard.addItemDecoration(dividerItemDecoration);
+//
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
+//                layoutManager.getOrientation());
+//        recyclerViewScoreCard.addItemDecoration(dividerItemDecoration);
 
         //Back nine RecyclerView
         GridLayoutManager layoutManagerBackNine = new GridLayoutManager(this, 9);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewBackNine.setAdapter(backNineAdapter);
         backNineAdapter.setScoreList(backNine);
 
-        recyclerViewBackNine.addItemDecoration(dividerItemDecoration);
+//        recyclerViewBackNine.addItemDecoration(dividerItemDecoration);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
