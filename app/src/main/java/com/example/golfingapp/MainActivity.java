@@ -2,20 +2,16 @@ package com.example.golfingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -30,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewCurrentHole;
     private int currentScore = 0;
     private int currentHole = 1;
-    private final String TEXTVIEW_HOLE_ID = "textViewHole";
     private RecyclerView recyclerViewScoreCard;
     private RecyclerView recyclerViewBackNine;
 
@@ -56,15 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
         //Front nine RecyclerView
         recyclerViewScoreCard = findViewById(R.id.recyclerViewScoreCard);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 9);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(9,
+                StaggeredGridLayoutManager.VERTICAL);
         recyclerViewScoreCard.setLayoutManager(layoutManager);
         ScoreAdapter scoreAdapter = new ScoreAdapter();
         recyclerViewScoreCard.setAdapter(scoreAdapter);
         scoreAdapter.setScoreList(frontNine, backNine);
-//
-//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
-//                layoutManager.getOrientation());
-//        recyclerViewScoreCard.addItemDecoration(dividerItemDecoration);
 
         //Back nine RecyclerView
         GridLayoutManager layoutManagerBackNine = new GridLayoutManager(this, 9);
@@ -73,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewBackNine.setLayoutManager(layoutManagerBackNine);
         recyclerViewBackNine.setAdapter(backNineAdapter);
         backNineAdapter.setScoreList(backNine);
-
-//        recyclerViewBackNine.addItemDecoration(dividerItemDecoration);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,11 +105,6 @@ public class MainActivity extends AppCompatActivity {
         updateUiCurrentScore();
 
         updateUiScoreCard();
-
-        Log.d("changeCurrentScore", "Size of array: " + roundScore.size());
-        for (int i = 1; i < roundScore.size(); i++) {
-            Log.d("saveScore", "Hole " + i + ": " + roundScore.get(i));
-        }
     }
 
     private static class ScoreHolder extends RecyclerView.ViewHolder {
