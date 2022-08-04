@@ -3,6 +3,7 @@ package com.example.golfingapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,8 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Front nine RecyclerView
         recyclerViewScoreCard = findViewById(R.id.recyclerViewScoreCard);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 9);
         recyclerViewScoreCard.setLayoutManager(layoutManager);
         ScoreAdapter scoreAdapter = new ScoreAdapter();
         recyclerViewScoreCard.setAdapter(scoreAdapter);
@@ -67,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewScoreCard.addItemDecoration(dividerItemDecoration);
 
         //Back nine RecyclerView
-        LinearLayoutManager layoutManagerBackNine = new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, false);
+        GridLayoutManager layoutManagerBackNine = new GridLayoutManager(this, 9);
         BackNineAdapter backNineAdapter = new BackNineAdapter();
         recyclerViewBackNine = findViewById(R.id.recyclerViewBackNine);
         recyclerViewBackNine.setLayoutManager(layoutManagerBackNine);

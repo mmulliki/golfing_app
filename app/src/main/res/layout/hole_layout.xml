@@ -12,7 +12,6 @@
         android:text="@string/hole_1"
         android:textAlignment="center"
         android:textSize="24sp"
-        android:minWidth="42dp"
         android:textStyle="bold" />
 
     <TextView
@@ -20,7 +19,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:minWidth="42dp"
         android:text="@string/editTextHint"
         android:textAlignment="center"
         android:textSize="24sp"
