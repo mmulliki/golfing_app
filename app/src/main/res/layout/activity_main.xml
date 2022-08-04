@@ -15,6 +15,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewBackNine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewScoreCard" />
+
     <TextView
         android:id="@+id/textViewCurrentHole"
         android:layout_width="wrap_content"
@@ -24,7 +33,7 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonSaveScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewScoreCard" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewBackNine" />
 
     <Button
         android:id="@+id/buttonSubtract"
