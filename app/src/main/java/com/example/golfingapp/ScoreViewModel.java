@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScoreViewModel extends ViewModel {
-    ArrayList<Integer> frontNineScores = new ArrayList<Integer>();
-    ArrayList<Integer> backNineScores = new ArrayList<Integer>();
+    private ArrayList<Integer> frontNineScores = new ArrayList<Integer>();
+    private ArrayList<Integer> backNineScores = new ArrayList<Integer>();
 
     public ScoreViewModel() {
         for (int i = 0; i < 18; i++) {

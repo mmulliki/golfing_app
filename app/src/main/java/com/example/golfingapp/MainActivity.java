@@ -19,9 +19,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Integer> roundScore = new ArrayList<Integer>();
-    private ArrayList<Integer> frontNine = new ArrayList<Integer>();
-    private ArrayList<Integer> backNine = new ArrayList<Integer>();
     private Button buttonSaveScore;
     private Button buttonAdd;
     private Button buttonSubtract;
@@ -37,15 +34,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        for (int i = 0; i < 18; i++) {
-            roundScore.add(0);
-            if (i < 9) {
-                frontNine.add(0);
-            } else {
-                backNine.add(0);
-            }
-        }
-
         buttonSaveScore = findViewById(R.id.buttonSaveScore);
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonSubtract = findViewById(R.id.buttonSubtract);
@@ -55,24 +43,16 @@ public class MainActivity extends AppCompatActivity {
         ScoreViewModel scoreViewModel = new ViewModelProvider(this)
                 .get(ScoreViewModel.class);
 
-        //Front nine RecyclerView
+        //Set up RecyclerView
         recyclerViewScoreCard = findViewById(R.id.recyclerViewScoreCard);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(9,
                 StaggeredGridLayoutManager.VERTICAL);
         recyclerViewScoreCard.setLayoutManager(layoutManager);
         ScoreAdapter scoreAdapter = new ScoreAdapter();
         recyclerViewScoreCard.setAdapter(scoreAdapter);
-        scoreAdapter.setScoreList(scoreViewModel.frontNineScores);
+        scoreAdapter.setScoreList(scoreViewModel.getScores());
 
-        //Back nine RecyclerView
-        GridLayoutManager layoutManagerBackNine = new GridLayoutManager(this, 9);
-        BackNineAdapter backNineAdapter = new BackNineAdapter();
-        recyclerViewBackNine = findViewById(R.id.recyclerViewBackNine);
-        recyclerViewBackNine.setLayoutManager(layoutManagerBackNine);
-        recyclerViewBackNine.setAdapter(backNineAdapter);
-//        backNineAdapter.setScoreList(backNine);
-        backNineAdapter.setScoreList(scoreViewModel.getBackNineScores());
-
+        //Set up listeners
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveScore(View view) {
-        roundScore.add(currentScore);
         currentScore = 0;
         updateUiCurrentScore();
 
@@ -148,10 +127,10 @@ public class MainActivity extends AppCompatActivity {
 
     private static class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
 
-        private ArrayList<Integer> frontNine;
+        private ArrayList<Integer> arrayScores;
 
-        public void setScoreList(ArrayList<Integer> frontNine) {
-            this.frontNine = frontNine;
+        public void setScoreList(ArrayList<Integer> arrayScores) {
+            this.arrayScores = arrayScores;
         }
 
         @NonNull
@@ -166,44 +145,15 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ScoreHolder holder, int position) {
-            holder.bindHoleScore(frontNine.get(position), position);
+            holder.bindHoleScore(arrayScores.get(position), position);
         }
 
         @Override
         public int getItemCount() {
-            return frontNine.size();
+            return arrayScores.size();
         }
     }
 
-    private static class BackNineAdapter extends RecyclerView.Adapter<ScoreHolder> {
-
-        private ArrayList<Integer> backNine;
-
-        public void setScoreList(ArrayList<Integer> backNine) {
-            this.backNine = backNine;
-        }
-
-        @NonNull
-        @Override
-        public ScoreHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-
-            View object = inflater.inflate(R.layout.hole_layout, parent, false);
-
-            return new ScoreHolder(object);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ScoreHolder holder, int position) {
-            int holeNumber = position + 9;
-            holder.bindHoleScore(backNine.get(position), holeNumber);
-        }
-
-        @Override
-        public int getItemCount() {
-            return backNine.size();
-        }
-    }
     private void updateUiScoreCard() {
 
     }
