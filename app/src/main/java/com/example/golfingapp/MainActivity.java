@@ -2,11 +2,14 @@ package com.example.golfingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonAdd;
     private Button buttonSubtract;
     private TextView textViewCurrentHole;
-    private int currentScore = 0;
-    private int currentHole = 0;
+    private int currentScore;
+    private int currentHole;
     private RecyclerView recyclerViewScoreCard;
     private RecyclerView recyclerViewBackNine;
 
@@ -48,7 +51,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewScoreCard.setLayoutManager(layoutManager);
         ScoreAdapter scoreAdapter = new ScoreAdapter();
         recyclerViewScoreCard.setAdapter(scoreAdapter);
-        scoreAdapter.setScoreList(scoreViewModel.getScores());
+//        scoreAdapter.setScoreList(scoreViewModel.getScores());
+        LiveData<ArrayList<Integer>> roundScores = scoreViewModel.getAllScores();
+        roundScores.observe(this, new Observer<ArrayList<Integer>>() {
+            @Override
+            public void onChanged(ArrayList<Integer> integers) {
+                Log.d("Observer", "Entered observer");
+                scoreAdapter.setScoreList(integers);
+            }
+        });
 
         //Set up listeners
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -75,10 +86,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeCurrentScore(View view) {
         if (view.getId() == buttonAdd.getId()) {
-            currentScore += 1;
+            currentScore++;
         } else {
             if (currentScore > 0) {
-                currentScore -= 1;
+                currentScore--;
             }
         }
         updateUiCurrentScore();
@@ -86,10 +97,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveScore(View view, ScoreViewModel scoreViewModel,
                           ScoreAdapter scoreAdapter) {
-        scoreViewModel.addScore(currentScore, currentHole);
+        Log.d("CurrentHole", "Before addScore: " + currentHole);
+        scoreViewModel.addScore(currentHole, currentScore);
 
         currentScore = 0;
         currentHole++;
+        Log.d("CurrentHole", "After addScore: " + currentHole);
         updateUiCurrentScore();
 
 //        updateUiScoreCard(scoreViewModel, scoreAdapter);
@@ -139,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
         public void setScoreList(ArrayList<Integer> arrayScores) {
             this.arrayScores = arrayScores;
+            notifyDataSetChanged();
         }
 
         @NonNull
