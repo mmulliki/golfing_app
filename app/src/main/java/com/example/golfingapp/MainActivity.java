@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,17 +27,24 @@ public class MainActivity extends AppCompatActivity {
     private int currentScore;
     private int currentHole;
     private RecyclerView recyclerViewScoreCard;
-
+    private final String KEY_CURRENT_SCORE = "key_current_score";
+    private final String KEY_CURRENT_HOLE = "key_current_hole";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        setContentView(R.layout.activity_main);
         buttonSaveScore = findViewById(R.id.buttonSaveScore);
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonSubtract = findViewById(R.id.buttonSubtract);
         textViewCurrentHole = findViewById(R.id.textViewCurrentHole);
+
+        if (savedInstanceState != null) {
+            currentScore = savedInstanceState.getInt(KEY_CURRENT_SCORE);
+            currentHole = savedInstanceState.getInt(KEY_CURRENT_HOLE);
+            textViewCurrentHole.setText(String.valueOf(currentScore));
+        }
 
         //Set up ViewModel
         ScoreViewModel scoreViewModel = new ViewModelProvider(this)
@@ -89,6 +95,15 @@ public class MainActivity extends AppCompatActivity {
                 saveScore(scoreViewModel);
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(KEY_CURRENT_SCORE, currentScore);
+        outState.putInt(KEY_CURRENT_HOLE, currentHole);
+
     }
 
     public void changeCurrentScore(View view) {
