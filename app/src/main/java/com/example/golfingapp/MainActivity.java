@@ -2,14 +2,12 @@ package com.example.golfingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private int currentScore;
     private int currentHole;
     private RecyclerView recyclerViewScoreCard;
-    private RecyclerView recyclerViewBackNine;
 
 
     @Override
@@ -51,15 +48,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewScoreCard.setLayoutManager(layoutManager);
         ScoreAdapter scoreAdapter = new ScoreAdapter();
         recyclerViewScoreCard.setAdapter(scoreAdapter);
-//        scoreAdapter.setScoreList(scoreViewModel.getScores());
-        LiveData<ArrayList<Integer>> roundScores = scoreViewModel.getAllScores();
-        roundScores.observe(this, new Observer<ArrayList<Integer>>() {
+
+        final Observer<ArrayList<Integer>> scoreObserver = new Observer<ArrayList<Integer>>() {
             @Override
             public void onChanged(ArrayList<Integer> integers) {
-                Log.d("Observer", "Entered observer");
                 scoreAdapter.setScoreList(integers);
             }
-        });
+        };
+
+        scoreViewModel.getAllScores().observe(this, scoreObserver);
 
         //Set up listeners
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSaveScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveScore(view, scoreViewModel, scoreAdapter);
+                saveScore(scoreViewModel);
             }
         });
     }
@@ -95,23 +92,17 @@ public class MainActivity extends AppCompatActivity {
         updateUiCurrentScore();
     }
 
-    public void saveScore(View view, ScoreViewModel scoreViewModel,
-                          ScoreAdapter scoreAdapter) {
-        Log.d("CurrentHole", "Before addScore: " + currentHole);
-        scoreViewModel.addScore(currentHole, currentScore);
+    public void saveScore(ScoreViewModel scoreViewModel) {
 
+        scoreViewModel.addScore(currentHole, currentScore);
         currentScore = 0;
         currentHole++;
-        Log.d("CurrentHole", "After addScore: " + currentHole);
-        updateUiCurrentScore();
 
-//        updateUiScoreCard(scoreViewModel, scoreAdapter);
+        updateUiCurrentScore();
     }
 
-    private void updateUiScoreCard(ScoreViewModel scoreViewModel,
-                                   ScoreAdapter scoreAdapter) {
-        scoreAdapter.setScoreList(scoreViewModel.getScores());
-
+    public void updateUiCurrentScore() {
+        textViewCurrentHole.setText(String.valueOf(currentScore));
     }
 
     private static class ScoreHolder extends RecyclerView.ViewHolder {
@@ -177,7 +168,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void updateUiCurrentScore() {
-        textViewCurrentHole.setText(String.valueOf(currentScore));
-    }
 }

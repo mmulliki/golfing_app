@@ -1,36 +1,31 @@
 package com.example.golfingapp;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ScoreViewModel extends ViewModel {
-    private ArrayList<Integer> frontNineScores = new ArrayList<Integer>();
+    private ArrayList<Integer> arrayRoundScores = new ArrayList<Integer>();
     private MutableLiveData<ArrayList<Integer>> roundScores = new MutableLiveData<>();
 
     public ScoreViewModel() {
         for (int i = 0; i < 18; i++) {
-            frontNineScores.add(0);
+            arrayRoundScores.add(0);
         }
-        roundScores.setValue(frontNineScores);
+        roundScores.setValue(arrayRoundScores);
     }
 
     public MutableLiveData<ArrayList<Integer>> getAllScores() {
         return roundScores;
     }
 
-    public ArrayList<Integer> getScores() {
-        return frontNineScores;
-    }
-
     public void addScore(int currentHole, int holeScore) {
-        frontNineScores.set(currentHole, holeScore);
+        arrayRoundScores.set(currentHole, holeScore);
+        roundScores.setValue(arrayRoundScores);
     }
 
     public void updateHole(int holeScore, int index) {
-        frontNineScores.add(index, holeScore);
+        arrayRoundScores.add(index, holeScore);
     }
 }
