@@ -25,6 +25,7 @@ public class ScoreViewModel extends ViewModel {
     }
 
     public void addScore(int currentHole, int holeScore) {
+        //Set the score for the current hole
         arrayRoundScores.set(currentHole, holeScore);
 
         //Add score to front nine total
@@ -39,6 +40,7 @@ public class ScoreViewModel extends ViewModel {
         totalScore += holeScore;
         arrayRoundScores.set(BACK_TOTAL_POSITION, totalScore);
 
+        //Update the UI
         roundScores.setValue(arrayRoundScores);
     }
 }
