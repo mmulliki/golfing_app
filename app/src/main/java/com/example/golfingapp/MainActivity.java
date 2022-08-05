@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -27,8 +28,11 @@ public class MainActivity extends AppCompatActivity {
     private int currentScore;
     private int currentHole;
     private RecyclerView recyclerViewScoreCard;
-    private final String KEY_CURRENT_SCORE = "key_current_score";
-    private final String KEY_CURRENT_HOLE = "key_current_hole";
+    private static final String KEY_CURRENT_SCORE = "key_current_score";
+    private static final String KEY_CURRENT_HOLE = "key_current_hole";
+    private static final String FRONT_TOTAL_LABEL = "Ot";
+    private static final String BACK_TOTAL_LABEL = "In";
+    private static final int GRID_LAYOUT_SPAN= 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Set up RecyclerView
         recyclerViewScoreCard = findViewById(R.id.recyclerViewScoreCard);
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(9,
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(GRID_LAYOUT_SPAN,
                 StaggeredGridLayoutManager.VERTICAL);
         recyclerViewScoreCard.setLayoutManager(layoutManager);
         ScoreAdapter scoreAdapter = new ScoreAdapter();
@@ -166,7 +170,12 @@ public class MainActivity extends AppCompatActivity {
                 String tempScore = " " + score;
                 this.score.setText(tempScore);
             } else {
-                label.setText(String.valueOf(position));
+                switch (position) {
+                    case 10: label.setText(FRONT_TOTAL_LABEL); break;
+                    case 20: label.setText(BACK_TOTAL_LABEL); break;
+                    default: label.setText(String.valueOf(position));
+
+                }
                 if (score < 10) {
                     String tempString = " " + score;
                     this.score.setText(tempString);
