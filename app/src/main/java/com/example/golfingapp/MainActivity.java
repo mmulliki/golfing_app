@@ -8,12 +8,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -101,11 +103,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveScore(ScoreViewModel scoreViewModel) {
-        scoreViewModel.addScore(currentHole, currentScore);
-        currentScore = 0;
-        currentHole++;
+        if (currentScore == 0) {
+            String message = getResources().getString(R.string.toastValidScoreMessage);
+            Toast.makeText(this, message,
+                    Toast.LENGTH_SHORT).show();
+        } else if (currentHole < 18) {
+            scoreViewModel.addScore(currentHole, currentScore);
+            currentScore = 0;
+            currentHole++;
 
-        updateUiCurrentScore();
+            updateUiCurrentScore();
+        }
+
     }
 
     public void updateScore(ScoreViewModel scoreViewModel, int position) {
