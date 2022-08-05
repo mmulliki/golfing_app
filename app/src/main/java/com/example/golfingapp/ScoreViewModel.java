@@ -24,8 +24,4 @@ public class ScoreViewModel extends ViewModel {
         arrayRoundScores.set(currentHole, holeScore);
         roundScores.setValue(arrayRoundScores);
     }
-
-    public void updateHole(int holeScore, int index) {
-        arrayRoundScores.add(index, holeScore);
-    }
 }

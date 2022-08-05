@@ -2,6 +2,7 @@ package com.example.golfingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
         scoreViewModel.getAllScores().observe(this, scoreObserver);
 
         //Set up listeners
+        scoreAdapter.setOnItemClickListener(new ClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                updateScore(scoreViewModel, position);
+            }
+        });
+
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,10 +101,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveScore(ScoreViewModel scoreViewModel) {
-
         scoreViewModel.addScore(currentHole, currentScore);
         currentScore = 0;
         currentHole++;
+
+        updateUiCurrentScore();
+    }
+
+    public void updateScore(ScoreViewModel scoreViewModel, int position) {
+        scoreViewModel.addScore(position, currentScore);
+        currentScore = 0;
 
         updateUiCurrentScore();
     }
@@ -106,19 +120,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static class ScoreHolder extends RecyclerView.ViewHolder {
-
-        TextView label;
-        TextView score;
+        private TextView label;
+        private TextView score;
+        private ConstraintLayout constraintLayoutHole;
 
         public ScoreHolder(@NonNull View itemView) {
             super(itemView);
 
             label = itemView.findViewById(R.id.textViewLabel);
             score = itemView.findViewById(R.id.textViewScore);
+            constraintLayoutHole = itemView.findViewById(R.id.constraintLayoutHolder);
         }
 
-        public void bindHoleScore(Integer score, int position) {
+        public void bindHoleScore(Integer score, int position, ClickListener clickListener) {
             position++;
+
             if (position < 10) {
                 String tempPosition = " " + position;
                 label.setText(tempPosition);
@@ -134,12 +150,20 @@ public class MainActivity extends AppCompatActivity {
                     this.score.setText(String.valueOf(score));
                 }
             }
+
+            constraintLayoutHole.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clickListener.onItemClick(view, getAdapterPosition());
+                }
+            });
+
         }
     }
 
     private static class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
-
         private ArrayList<Integer> arrayScores;
+        private static ClickListener clickListener;
 
         public void setScoreList(ArrayList<Integer> arrayScores) {
             this.arrayScores = arrayScores;
@@ -158,14 +182,20 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ScoreHolder holder, int position) {
-            holder.bindHoleScore(arrayScores.get(position), position);
+            holder.bindHoleScore(arrayScores.get(position), position, clickListener);
         }
 
         @Override
         public int getItemCount() {
             return arrayScores.size();
         }
+
+        public void setOnItemClickListener(ClickListener clickListener) {
+            ScoreAdapter.clickListener = clickListener;
+        }
     }
 
-
+    public interface ClickListener {
+        void onItemClick(View v, int position);
+    }
 }
