@@ -10,6 +10,8 @@ public class ScoreViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Integer>> roundScores = new MutableLiveData<>();
     private static final int LOOP_START_VALUE = 0;
     private static final int LOOP_END_VALUE = 20;
+    private static final int FRONT_TOTAL_POSITION = 9;
+    private static final int BACK_TOTAL_POSITION = 19;
 
     public ScoreViewModel() {
         for (int i = LOOP_START_VALUE; i < LOOP_END_VALUE; i++) {
@@ -24,6 +26,19 @@ public class ScoreViewModel extends ViewModel {
 
     public void addScore(int currentHole, int holeScore) {
         arrayRoundScores.set(currentHole, holeScore);
+
+        //Add score to front nine total
+        if (currentHole < FRONT_TOTAL_POSITION) {
+            int frontTotalScore = arrayRoundScores.get(FRONT_TOTAL_POSITION);
+            frontTotalScore += holeScore;
+            arrayRoundScores.set(FRONT_TOTAL_POSITION, frontTotalScore);
+        }
+
+        //Add score to round total
+        int totalScore = arrayRoundScores.get(BACK_TOTAL_POSITION);
+        totalScore += holeScore;
+        arrayRoundScores.set(BACK_TOTAL_POSITION, totalScore);
+
         roundScores.setValue(arrayRoundScores);
     }
 }
