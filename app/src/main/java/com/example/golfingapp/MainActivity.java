@@ -78,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
         scoreAdapter.setOnItemClickListener(new ClickListener() {
             @Override
             public void onItemClick(View v, int position) {
+                TextView label = v.findViewById(R.id.textViewLabel);
+                TextView score = v.findViewById(R.id.textViewScore);
+//                label.setBackground(getResources().getDrawable(R.drawable.on_edit_background));
                 // If scorecard is not in edit mode, change button to "Edit" mode and turn on
                 // edit mode, set the current position to update. Otherwise, turn off edit mode,
                 // and set the button text to Save.
@@ -85,10 +88,15 @@ public class MainActivity extends AppCompatActivity {
                     isEdit = false;
                     buttonSaveScore.setText(getResources().getString(R.string.buttonSaveName));
                     buttonSaveScore.setBackgroundColor(getResources().getColor(R.color.purple_700));
+                    label.setBackgroundResource(R.drawable.border);
+                    score.setBackgroundResource(R.drawable.border);
                 } else {
                     isEdit = true;
                     buttonSaveScore.setText(getResources().getString(R.string.buttonEditName));
                     buttonSaveScore.setBackgroundColor(getResources().getColor(R.color.orange));
+                    label.setBackgroundResource(R.drawable.on_edit_background);
+                    score.setBackgroundResource(R.drawable.on_edit_background);
+
                     holeToUpdate = position;
                 }
 //                updateScore(scoreViewModel, position);
