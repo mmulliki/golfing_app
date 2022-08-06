@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_CURRENT_HOLE = "key_current_hole";
     private static final String FRONT_TOTAL_LABEL = "Ot";
     private static final String BACK_TOTAL_LABEL = "In";
+    private static final String ROUND_TOTAL_LABEL = "Total";
     private static final int GRID_LAYOUT_SPAN= 10;
 
     @Override
@@ -208,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 10: label.setText(FRONT_TOTAL_LABEL); break;
                     case 20: label.setText(BACK_TOTAL_LABEL); break;
+                    case 21: label.setText(ROUND_TOTAL_LABEL); break;
                     default: label.setText(String.valueOf(position - 1));
 
                 }

@@ -9,9 +9,10 @@ public class ScoreViewModel extends ViewModel {
     private ArrayList<Integer> arrayRoundScores = new ArrayList<Integer>();
     private MutableLiveData<ArrayList<Integer>> roundScores = new MutableLiveData<>();
     private static final int LOOP_START_VALUE = 0;
-    private static final int LOOP_END_VALUE = 20;
+    private static final int LOOP_END_VALUE = 21;
     private static final int FRONT_TOTAL_POSITION = 9;
     private static final int BACK_TOTAL_POSITION = 19;
+    private static final int ROUND_TOTAL_POSITION = 20;
 
     public ScoreViewModel() {
         for (int i = LOOP_START_VALUE; i < LOOP_END_VALUE; i++) {
@@ -33,12 +34,16 @@ public class ScoreViewModel extends ViewModel {
             int frontTotalScore = arrayRoundScores.get(FRONT_TOTAL_POSITION);
             frontTotalScore += holeScore;
             arrayRoundScores.set(FRONT_TOTAL_POSITION, frontTotalScore);
+        } else if (currentHole > FRONT_TOTAL_POSITION && currentHole < BACK_TOTAL_POSITION) {
+            int backTotalScore = arrayRoundScores.get(BACK_TOTAL_POSITION);
+            backTotalScore += holeScore;
+            arrayRoundScores.set(BACK_TOTAL_POSITION, backTotalScore);
         }
 
         //Add score to round total
-        int totalScore = arrayRoundScores.get(BACK_TOTAL_POSITION);
+        int totalScore = arrayRoundScores.get(ROUND_TOTAL_POSITION);
         totalScore += holeScore;
-        arrayRoundScores.set(BACK_TOTAL_POSITION, totalScore);
+        arrayRoundScores.set(ROUND_TOTAL_POSITION, totalScore);
 
         //Update the UI
         roundScores.setValue(arrayRoundScores);
@@ -55,11 +60,15 @@ public class ScoreViewModel extends ViewModel {
             int frontTotalScore = arrayRoundScores.get(FRONT_TOTAL_POSITION);
             frontTotalScore -= scoreDifferential;
             arrayRoundScores.set(FRONT_TOTAL_POSITION, frontTotalScore);
+        } else if (currentHole > FRONT_TOTAL_POSITION && currentHole < BACK_TOTAL_POSITION) {
+            int backTotalScore = arrayRoundScores.get(BACK_TOTAL_POSITION);
+            backTotalScore += holeScore;
+            arrayRoundScores.set(BACK_TOTAL_POSITION, backTotalScore);
         }
 
-        int totalScore = arrayRoundScores.get(BACK_TOTAL_POSITION);
+        int totalScore = arrayRoundScores.get(ROUND_TOTAL_POSITION);
         totalScore -= scoreDifferential;
-        arrayRoundScores.set(BACK_TOTAL_POSITION, totalScore);
+        arrayRoundScores.set(ROUND_TOTAL_POSITION, totalScore);
 
         //Set the score for the current hole
         arrayRoundScores.set(currentHole, holeScore);

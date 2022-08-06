@@ -8,4 +8,5 @@
     <string name="buttonSubtractFigure">-</string>
     <string name="toastValidScoreMessage">Please enter a valid score</string>
     <string name="hole_1">1</string>
+    <string name="textViewTotalLabel">Total</string>
 </resources>

@@ -25,6 +25,16 @@
         app:layout_constraintTop_toBottomOf="@id/recyclerViewScoreCard" />
 
     <TextView
+        android:id="@+id/textViewTotalScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewCurrentHole"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewBackNine" />
+
+    <TextView
         android:id="@+id/textViewCurrentHole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,7 +43,7 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonSaveScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewBackNine" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTotalScore" />
 
     <Button
         android:id="@+id/buttonSubtract"
