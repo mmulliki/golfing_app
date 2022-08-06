@@ -84,9 +84,11 @@ public class MainActivity extends AppCompatActivity {
                 if (isEdit) {
                     isEdit = false;
                     buttonSaveScore.setText(getResources().getString(R.string.buttonSaveName));
+                    buttonSaveScore.setBackgroundColor(getResources().getColor(R.color.purple_700));
                 } else {
                     isEdit = true;
                     buttonSaveScore.setText(getResources().getString(R.string.buttonEditName));
+                    buttonSaveScore.setBackgroundColor(getResources().getColor(R.color.orange));
                     holeToUpdate = position;
                 }
 //                updateScore(scoreViewModel, position);
@@ -159,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
         currentScore = 0;
         isEdit = false;
         buttonSaveScore.setText(R.string.buttonSaveName);
+        buttonSaveScore.setBackgroundColor(getResources().getColor(R.color.purple_700));
         updateUiCurrentScore();
     }
 
