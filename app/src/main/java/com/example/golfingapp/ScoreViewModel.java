@@ -43,4 +43,28 @@ public class ScoreViewModel extends ViewModel {
         //Update the UI
         roundScores.setValue(arrayRoundScores);
     }
+
+    public void updateScore(int currentHole, int holeScore) {
+        // Get the old score of the current hole from the array,
+        // add that to the new score of the current hole, and add
+        // that to the 9/18 hole totals.
+        int oldScore = arrayRoundScores.get(currentHole);
+        int scoreDifferential = oldScore - holeScore;
+
+        if (currentHole < FRONT_TOTAL_POSITION) {
+            int frontTotalScore = arrayRoundScores.get(FRONT_TOTAL_POSITION);
+            frontTotalScore -= scoreDifferential;
+            arrayRoundScores.set(FRONT_TOTAL_POSITION, frontTotalScore);
+        }
+
+        int totalScore = arrayRoundScores.get(BACK_TOTAL_POSITION);
+        totalScore -= scoreDifferential;
+        arrayRoundScores.set(BACK_TOTAL_POSITION, totalScore);
+
+        //Set the score for the current hole
+        arrayRoundScores.set(currentHole, holeScore);
+
+        // Update the UI
+        roundScores.setValue(arrayRoundScores);
+    }
 }

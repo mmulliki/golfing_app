@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewCurrentHole;
     private int currentScore;
     private int currentHole;
+    private boolean isEdit = false;
+    private int holeToUpdate;
     private RecyclerView recyclerViewScoreCard;
     private static final String KEY_CURRENT_SCORE = "key_current_score";
     private static final String KEY_CURRENT_HOLE = "key_current_hole";
@@ -75,7 +78,18 @@ public class MainActivity extends AppCompatActivity {
         scoreAdapter.setOnItemClickListener(new ClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                updateScore(scoreViewModel, position);
+                // If scorecard is not in edit mode, change button to "Edit" mode and turn on
+                // edit mode, set the current position to update. Otherwise, turn off edit mode,
+                // and set the button text to Save.
+                if (isEdit) {
+                    isEdit = false;
+                    buttonSaveScore.setText(getResources().getString(R.string.buttonSaveName));
+                } else {
+                    isEdit = true;
+                    buttonSaveScore.setText(getResources().getString(R.string.buttonEditName));
+                    holeToUpdate = position;
+                }
+//                updateScore(scoreViewModel, position);
             }
         });
 
@@ -96,7 +110,11 @@ public class MainActivity extends AppCompatActivity {
         buttonSaveScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveScore(scoreViewModel);
+                if (isEdit) {
+                    updateScore(scoreViewModel, holeToUpdate);
+                } else {
+                    saveScore(scoreViewModel);
+                }
             }
         });
     }
@@ -137,9 +155,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateScore(ScoreViewModel scoreViewModel, int position) {
-        scoreViewModel.addScore(position, currentScore);
+        scoreViewModel.updateScore(position, currentScore);
         currentScore = 0;
-
+        isEdit = false;
+        buttonSaveScore.setText(R.string.buttonSaveName);
         updateUiCurrentScore();
     }
 
@@ -173,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 10: label.setText(FRONT_TOTAL_LABEL); break;
                     case 20: label.setText(BACK_TOTAL_LABEL); break;
-                    default: label.setText(String.valueOf(position));
+                    default: label.setText(String.valueOf(position - 1));
 
                 }
                 if (score < 10) {

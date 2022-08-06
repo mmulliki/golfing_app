@@ -2,6 +2,7 @@
     <string name="app_name">Golfing app</string>
     <string name="editTextHint">--</string>
     <string name="buttonSaveName">Save</string>
+    <string name="buttonEditName">Edit</string>
     <string name="textViewCurrentHole">0</string>
     <string name="buttonAddFigure">+</string>
     <string name="buttonSubtractFigure">-</string>
