@@ -76,4 +76,8 @@ public class ScoreViewModel extends ViewModel {
         // Update the UI
         roundScores.setValue(arrayRoundScores);
     }
+
+    public int getTotalScore() {
+        return arrayRoundScores.get(ROUND_TOTAL_POSITION);
+    }
 }

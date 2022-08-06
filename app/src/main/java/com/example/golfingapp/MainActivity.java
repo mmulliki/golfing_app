@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonAdd;
     private Button buttonSubtract;
     private TextView textViewCurrentHole;
+    private TextView textViewTotalScore;
     private int currentScore;
     private int currentHole;
     private boolean isEdit = false;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonSubtract = findViewById(R.id.buttonSubtract);
         textViewCurrentHole = findViewById(R.id.textViewCurrentHole);
+        textViewTotalScore = findViewById(R.id.textViewTotalScore);
 
         if (savedInstanceState != null) {
             currentScore = savedInstanceState.getInt(KEY_CURRENT_SCORE);
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(ArrayList<Integer> integers) {
                 scoreAdapter.setScoreList(integers);
+                textViewTotalScore.setText(String.valueOf(scoreViewModel.getTotalScore()));
             }
         };
 
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 // edit mode, set the current position to update. Otherwise, turn off edit mode,
                 // and set the button text to Save.
                 // Restrict clicks to holes, not total.
-                if (position != 9 && position != 19) {
+                if (position != 9 && position < 19) {
                     if (isEdit) {
                         if (position == holeToUpdate) {
                             isEdit = false;
@@ -257,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return arrayScores.size();
+            return arrayScores.size() - 1;
         }
 
         public void setOnItemClickListener(ClickListener clickListener) {
