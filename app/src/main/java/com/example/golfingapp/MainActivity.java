@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -228,6 +231,12 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     clickListener.onItemClick(view, getAdapterPosition());
+                    ColorDrawable[] arrayColorDrawable = {new ColorDrawable(Color.RED),
+                            new ColorDrawable(Color.GREEN)};
+                    TransitionDrawable transitionDrawable =
+                            new TransitionDrawable(arrayColorDrawable);
+                    label.setBackground(transitionDrawable);
+                    transitionDrawable.startTransition(250);
                 }
             });
 
