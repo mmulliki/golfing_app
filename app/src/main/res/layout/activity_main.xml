@@ -15,24 +15,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewBackNine"
+    <TextView
+        android:id="@+id/textViewTotalScoreLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:text="Total score"
+        android:background="@drawable/border"
+        android:textAlignment="center"
+        android:textSize="@dimen/total_label_text_size"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recyclerViewScoreCard" />
 
     <TextView
         android:id="@+id/textViewTotalScore"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@drawable/border"
         android:layout_height="wrap_content"
         android:text="@string/textViewCurrentHole"
+        android:textAlignment="center"
         android:textSize="32sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerViewBackNine" />
+        app:layout_constraintTop_toBottomOf="@id/textViewTotalScoreLabel" />
 
     <TextView
         android:id="@+id/textViewCurrentHole"
