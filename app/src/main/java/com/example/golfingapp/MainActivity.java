@@ -3,6 +3,7 @@ package com.example.golfingapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -193,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
         private TextView label;
         private TextView score;
         private ConstraintLayout constraintLayoutHole;
+        private Drawable[] drawableArray = new Drawable[2];
 
         public ScoreHolder(@NonNull View itemView) {
             super(itemView);
@@ -200,6 +203,12 @@ public class MainActivity extends AppCompatActivity {
             label = itemView.findViewById(R.id.textViewLabel);
             score = itemView.findViewById(R.id.textViewScore);
             constraintLayoutHole = itemView.findViewById(R.id.constraintLayoutHolder);
+            ResourcesCompat.getDrawable(itemView.getResources(),
+                    R.drawable.on_transition_background, itemView.getContext().getTheme());
+            drawableArray[0] = ResourcesCompat.getDrawable(itemView.getResources(),
+                    R.drawable.on_transition_background, itemView.getContext().getTheme());
+            drawableArray[1] = ResourcesCompat.getDrawable(itemView.getResources(),
+                    R.drawable.on_edit_background, itemView.getContext().getTheme());
         }
 
         public void bindHoleScore(Integer score, int position, ClickListener clickListener) {
@@ -234,9 +243,9 @@ public class MainActivity extends AppCompatActivity {
                     ColorDrawable[] arrayColorDrawable = {new ColorDrawable(Color.RED),
                             new ColorDrawable(Color.GREEN)};
                     TransitionDrawable transitionDrawable =
-                            new TransitionDrawable(arrayColorDrawable);
+                            new TransitionDrawable(drawableArray);
                     label.setBackground(transitionDrawable);
-                    transitionDrawable.startTransition(250);
+                    transitionDrawable.startTransition(125);
                 }
             });
 
