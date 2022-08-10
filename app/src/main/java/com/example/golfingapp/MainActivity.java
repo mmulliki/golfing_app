@@ -85,10 +85,19 @@ public class MainActivity extends AppCompatActivity {
 
         //Set up listeners
         scoreAdapter.setOnItemClickListener(new ClickListener() {
+            private Drawable[] drawableArray = new Drawable[3];
+
+
             @Override
             public void onItemClick(View v, int position) {
                 TextView label = v.findViewById(R.id.textViewLabel);
                 TextView score = v.findViewById(R.id.textViewScore);
+
+                drawableArray[0] = ResourcesCompat.getDrawable(v.getResources(),
+                        R.drawable.on_transition_background, v.getContext().getTheme());
+                drawableArray[1] = ResourcesCompat.getDrawable(v.getResources(),
+                        R.drawable.on_edit_background, v.getContext().getTheme());
+
                 // If scorecard is not in edit mode, change button to "Edit" mode and turn on
                 // edit mode, set the current position to update. Otherwise, turn off edit mode,
                 // and set the button text to Save.
@@ -107,8 +116,13 @@ public class MainActivity extends AppCompatActivity {
                         buttonSaveScore.setText(getResources().getString(R.string.buttonEditName));
                         buttonSaveScore.setBackgroundColor(getResources()
                                 .getColor(R.color.red_alpha));
-                        label.setBackgroundResource(R.drawable.on_edit_background);
-                        score.setBackgroundResource(R.drawable.on_edit_background);
+                        TransitionDrawable transitionDrawable =
+                                new TransitionDrawable(drawableArray);
+                        label.setBackground(transitionDrawable);
+                        transitionDrawable.startTransition(125);
+
+//                        label.setBackgroundResource(R.drawable.on_edit_background);
+//                        score.setBackgroundResource(R.drawable.on_edit_background);
 
                         holeToUpdate = position;
                     }
@@ -242,10 +256,10 @@ public class MainActivity extends AppCompatActivity {
                     clickListener.onItemClick(view, getAdapterPosition());
                     ColorDrawable[] arrayColorDrawable = {new ColorDrawable(Color.RED),
                             new ColorDrawable(Color.GREEN)};
-                    TransitionDrawable transitionDrawable =
-                            new TransitionDrawable(drawableArray);
-                    label.setBackground(transitionDrawable);
-                    transitionDrawable.startTransition(125);
+//                    TransitionDrawable transitionDrawable =
+//                            new TransitionDrawable(drawableArray);
+//                    label.setBackground(transitionDrawable);
+//                    transitionDrawable.startTransition(125);
                 }
             });
 
