@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         //Set up listeners
         scoreAdapter.setOnItemClickListener(new ClickListener() {
             private Drawable[] drawableArray = new Drawable[3];
-
+            private Drawable[] reverseArray = new Drawable[3];
 
             @Override
             public void onItemClick(View v, int position) {
@@ -97,6 +97,18 @@ public class MainActivity extends AppCompatActivity {
                         R.drawable.on_transition_background, v.getContext().getTheme());
                 drawableArray[1] = ResourcesCompat.getDrawable(v.getResources(),
                         R.drawable.on_edit_background, v.getContext().getTheme());
+                TransitionDrawable transitionDrawable =
+                        new TransitionDrawable(drawableArray);
+                TransitionDrawable transitionDrawableScore =
+                        new TransitionDrawable(drawableArray);
+                reverseArray[0] = ResourcesCompat.getDrawable(v.getResources(),
+                        R.drawable.on_transition_background, v.getContext().getTheme());
+                reverseArray[1] = ResourcesCompat.getDrawable(v.getResources(),
+                        R.drawable.border, v.getContext().getTheme());
+                TransitionDrawable reverseTransDrawable =
+                        new TransitionDrawable(reverseArray);
+                TransitionDrawable reverseTransDrawableScore =
+                        new TransitionDrawable(reverseArray);
 
                 // If scorecard is not in edit mode, change button to "Edit" mode and turn on
                 // edit mode, set the current position to update. Otherwise, turn off edit mode,
@@ -106,23 +118,24 @@ public class MainActivity extends AppCompatActivity {
                     if (isEdit) {
                         if (position == holeToUpdate) {
                             isEdit = false;
-                            buttonSaveScore.setText(getResources().getString(R.string.buttonSaveName));
-                            buttonSaveScore.setBackgroundColor(getResources().getColor(R.color.purple_700));
-                            label.setBackgroundResource(R.drawable.border);
-                            score.setBackgroundResource(R.drawable.border);
+                            buttonSaveScore.setText(getResources()
+                                    .getString(R.string.buttonSaveName));
+                            buttonSaveScore.setBackgroundColor(getResources()
+                                    .getColor(R.color.purple_700));
+                            label.setBackground(reverseTransDrawable);
+                            reverseTransDrawable.startTransition(125);
+                            score.setBackground(reverseTransDrawableScore);
+                            reverseTransDrawableScore.startTransition(125);
                         }
                     } else {
                         isEdit = true;
                         buttonSaveScore.setText(getResources().getString(R.string.buttonEditName));
                         buttonSaveScore.setBackgroundColor(getResources()
                                 .getColor(R.color.red_alpha));
-                        TransitionDrawable transitionDrawable =
-                                new TransitionDrawable(drawableArray);
                         label.setBackground(transitionDrawable);
                         transitionDrawable.startTransition(125);
-
-//                        label.setBackgroundResource(R.drawable.on_edit_background);
-//                        score.setBackgroundResource(R.drawable.on_edit_background);
+                        score.setBackground(transitionDrawableScore);
+                        transitionDrawableScore.startTransition(125);
 
                         holeToUpdate = position;
                     }
@@ -209,7 +222,6 @@ public class MainActivity extends AppCompatActivity {
         private TextView label;
         private TextView score;
         private ConstraintLayout constraintLayoutHole;
-        private Drawable[] drawableArray = new Drawable[2];
 
         public ScoreHolder(@NonNull View itemView) {
             super(itemView);
@@ -217,12 +229,6 @@ public class MainActivity extends AppCompatActivity {
             label = itemView.findViewById(R.id.textViewLabel);
             score = itemView.findViewById(R.id.textViewScore);
             constraintLayoutHole = itemView.findViewById(R.id.constraintLayoutHolder);
-            ResourcesCompat.getDrawable(itemView.getResources(),
-                    R.drawable.on_transition_background, itemView.getContext().getTheme());
-            drawableArray[0] = ResourcesCompat.getDrawable(itemView.getResources(),
-                    R.drawable.on_transition_background, itemView.getContext().getTheme());
-            drawableArray[1] = ResourcesCompat.getDrawable(itemView.getResources(),
-                    R.drawable.on_edit_background, itemView.getContext().getTheme());
         }
 
         public void bindHoleScore(Integer score, int position, ClickListener clickListener) {
@@ -254,12 +260,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     clickListener.onItemClick(view, getAdapterPosition());
-                    ColorDrawable[] arrayColorDrawable = {new ColorDrawable(Color.RED),
-                            new ColorDrawable(Color.GREEN)};
-//                    TransitionDrawable transitionDrawable =
-//                            new TransitionDrawable(drawableArray);
-//                    label.setBackground(transitionDrawable);
-//                    transitionDrawable.startTransition(125);
                 }
             });
 
