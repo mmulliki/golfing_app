@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveScore(ScoreViewModel scoreViewModel) {
-        if (currentScore == 0) {
+        if (currentScore == 0 && !isEdit) {
             String message = getResources().getString(R.string.toastValidScoreMessage);
             Toast.makeText(this, message,
                     Toast.LENGTH_SHORT).show();
