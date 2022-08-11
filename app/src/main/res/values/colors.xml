@@ -10,5 +10,6 @@
     <color name="orange">#FFFF5911</color>
     <color name="red_alpha">#FFFF0000</color>
     <color name="gray">#FFAAAAAA</color>
-    <color name="green">#FF36BB36</color>
+    <color name="green">#FF689F38</color>
+    <color name="button_save_color">#FF212121</color>
 </resources>

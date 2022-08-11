@@ -121,7 +121,9 @@ public class MainActivity extends AppCompatActivity {
                             buttonSaveScore.setText(getResources()
                                     .getString(R.string.buttonSaveName));
                             buttonSaveScore.setBackgroundColor(getResources()
-                                    .getColor(R.color.purple_700));
+                                    .getColor(R.color.green));
+                            buttonSaveScore.setTextColor(getResources()
+                                    .getColor(R.color.button_save_color));
                             label.setBackground(reverseTransDrawable);
                             reverseTransDrawable.startTransition(125);
                             label.setBackground(ResourcesCompat.getDrawable(v.getResources(),
@@ -134,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                         buttonSaveScore.setText(getResources().getString(R.string.buttonEditName));
                         buttonSaveScore.setBackgroundColor(getResources()
                                 .getColor(R.color.red_alpha));
+                        buttonSaveScore.setTextColor(getResources().getColor(R.color.white));
                         label.setBackground(transitionDrawable);
                         transitionDrawable.startTransition(125);
                         score.setBackground(transitionDrawableScore);
@@ -212,7 +215,8 @@ public class MainActivity extends AppCompatActivity {
         currentScore = 0;
         isEdit = false;
         buttonSaveScore.setText(R.string.buttonSaveName);
-        buttonSaveScore.setBackgroundColor(getResources().getColor(R.color.purple_700));
+        buttonSaveScore.setBackgroundColor(getResources().getColor(R.color.green));
+        buttonSaveScore.setTextColor(getResources().getColor(R.color.button_save_color));
         updateUiCurrentScore();
     }
 

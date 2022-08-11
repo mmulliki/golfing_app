@@ -19,11 +19,8 @@
         android:id="@+id/textViewTotalScoreLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Total score"
+        android:text="@string/total_score_label"
         android:background="@drawable/label_border"
-        android:textAlignment="center"
-        android:textSize="@dimen/total_label_text_size"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recyclerViewScoreCard" />
@@ -34,9 +31,6 @@
         android:background="@drawable/border"
         android:layout_height="wrap_content"
         android:text="@string/textViewCurrentHole"
-        android:textAlignment="center"
-        android:textSize="32sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewTotalScoreLabel" />
@@ -87,6 +81,7 @@
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:text="@string/buttonSaveName"
+        android:textColor="@color/button_save_color"
         app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
