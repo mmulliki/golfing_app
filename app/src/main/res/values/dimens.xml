@@ -10,4 +10,5 @@
     <dimen name="button_save_corner_radius">50dp</dimen>
     <dimen name="constraint_layout_padding">20dp</dimen>
     <dimen name="constraint_layout_margin">16dp</dimen>
+    <dimen name="background_stroke">2dp</dimen>
 </resources>
