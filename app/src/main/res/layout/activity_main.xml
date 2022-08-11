@@ -19,8 +19,8 @@
         android:id="@+id/textViewTotalScoreLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/total_score_label"
         android:background="@drawable/label_border"
+        android:text="@string/total_score_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recyclerViewScoreCard" />
@@ -28,51 +28,56 @@
     <TextView
         android:id="@+id/textViewTotalScore"
         android:layout_width="match_parent"
-        android:background="@drawable/border"
         android:layout_height="wrap_content"
+        android:background="@drawable/border"
         android:text="@string/textViewCurrentHole"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewTotalScoreLabel" />
 
-    <TextView
-        android:id="@+id/textViewCurrentHole"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/scoreSelectorLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/textViewCurrentHole"
-        android:textSize="72sp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/buttonSaveScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTotalScore" />
+        app:layout_constraintTop_toBottomOf="@id/textViewTotalScore">
 
-    <Button
-        android:id="@+id/buttonSubtract"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/white"
-        android:text="@string/buttonSubtractFigure"
-        android:textColor="#FF0000"
-        android:textSize="48sp"
-        app:layout_constraintEnd_toStartOf="@id/textViewCurrentHole"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textViewCurrentHole" />
+        <Button
+            android:id="@+id/buttonSubtract"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="@string/buttonSubtractFigure"
+            android:textColor="#FF0000"
+            android:textSize="48sp" />
 
-    <Button
-        android:id="@+id/buttonAdd"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:backgroundTint="@color/white"
-        android:text="@string/buttonAddFigure"
-        android:textColor="#689F38"
-        android:textSize="48sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textViewCurrentHole"
-        app:layout_constraintTop_toTopOf="@id/textViewCurrentHole" />
+        <TextView
+            android:id="@+id/textViewCurrentHole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textViewCurrentHole"
+            android:textSize="72sp" />
+
+        <Button
+            android:id="@+id/buttonAdd"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="@string/buttonAddFigure"
+            android:textColor="#689F38"
+            android:textSize="48sp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/buttonSaveScore"
