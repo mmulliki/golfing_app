@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/constraint_layout_padding"
+    tools:context=".MainActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewScoreCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/recycler_view_socrecard_margin"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@id/scoreSelectorLayout"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTotalScoreLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textViewTotalScoreLabel" />
+
+    <TextView
+        android:id="@+id/textViewTotalScoreLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total_score_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTotalScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewCurrentHole"
+        android:textSize="@dimen/total_score"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/recyclerViewScoreCard"
+        app:layout_constraintTop_toBottomOf="@id/textViewTotalScoreLabel" />
+
+    <LinearLayout
+        android:id="@+id/scoreSelectorLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonSaveScore"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/buttonSubtract"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/buttons_score_margins"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="@string/buttonSubtractFigure"
+            android:textColor="@color/button_subtract_color"
+            android:textSize="@dimen/buttons_score_text_size" />
+
+        <TextView
+            android:id="@+id/textViewCurrentHole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textViewCurrentHole"
+            android:textSize="@dimen/total_score" />
+
+        <Button
+            android:id="@+id/buttonAdd"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/buttons_score_margins"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="@string/buttonAddFigure"
+            android:textColor="@color/green"
+            android:textSize="@dimen/buttons_score_text_size" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonSaveScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonSaveName"
+        android:textColor="@color/button_save_color"
+        app:cornerRadius="@dimen/button_save_corner_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
