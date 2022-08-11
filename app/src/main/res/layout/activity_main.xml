@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Total score"
-        android:background="@drawable/border"
+        android:background="@drawable/label_border"
         android:textAlignment="center"
         android:textSize="@dimen/total_label_text_size"
         android:textStyle="bold"

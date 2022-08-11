@@ -124,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
                                     .getColor(R.color.purple_700));
                             label.setBackground(reverseTransDrawable);
                             reverseTransDrawable.startTransition(125);
+                            label.setBackground(ResourcesCompat.getDrawable(v.getResources(),
+                                    R.drawable.label_border, v.getContext().getTheme()));
                             score.setBackground(reverseTransDrawableScore);
                             reverseTransDrawableScore.startTransition(125);
                         }
