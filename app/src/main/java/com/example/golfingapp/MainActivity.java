@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(View v, int position) {
-                TextView label = v.findViewById(R.id.textViewLabel);
                 TextView score = v.findViewById(R.id.textViewScore);
 
                 drawableArray[0] = ResourcesCompat.getDrawable(v.getResources(),
@@ -124,10 +123,7 @@ public class MainActivity extends AppCompatActivity {
                                     .getColor(R.color.green));
                             buttonSaveScore.setTextColor(getResources()
                                     .getColor(R.color.button_save_color));
-                            label.setBackground(reverseTransDrawable);
                             reverseTransDrawable.startTransition(125);
-                            label.setBackground(ResourcesCompat.getDrawable(v.getResources(),
-                                    R.drawable.label_border, v.getContext().getTheme()));
                             score.setBackground(reverseTransDrawableScore);
                             reverseTransDrawableScore.startTransition(125);
                         }
@@ -137,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
                         buttonSaveScore.setBackgroundColor(getResources()
                                 .getColor(R.color.red_alpha));
                         buttonSaveScore.setTextColor(getResources().getColor(R.color.white));
-                        label.setBackground(transitionDrawable);
                         transitionDrawable.startTransition(125);
                         score.setBackground(transitionDrawableScore);
                         transitionDrawableScore.startTransition(125);
