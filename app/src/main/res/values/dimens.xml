@@ -2,4 +2,12 @@
 <resources>
     <dimen name="total_label_text_size">28sp</dimen>
     <dimen name="label_padding">2dp</dimen>
+    <dimen name="total_score">72sp</dimen>
+    <dimen name="buttons_score_text_size">48sp</dimen>
+    <dimen name="buttons_score_margins">16dp</dimen>
+    <dimen name="recycler_view_socrecard_margin">16dp</dimen>
+    <dimen name="button_save_margin">5dp</dimen>
+    <dimen name="button_save_corner_radius">50dp</dimen>
+    <dimen name="constraint_layout_padding">20dp</dimen>
+    <dimen name="constraint_layout_margin">16dp</dimen>
 </resources>

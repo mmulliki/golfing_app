@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:padding="@dimen/constraint_layout_padding"
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewScoreCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/recycler_view_socrecard_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewTotalScore" />
@@ -20,7 +20,6 @@
         android:id="@+id/textViewTotalScoreLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/label_border"
         android:text="@string/total_score_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,8 +29,8 @@
         android:id="@+id/textViewTotalScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border"
         android:text="@string/textViewCurrentHole"
+        android:textSize="@dimen/total_score"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewTotalScoreLabel" />
@@ -52,12 +51,12 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/buttons_score_margins"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
             android:text="@string/buttonSubtractFigure"
-            android:textColor="#FF0000"
-            android:textSize="48sp" />
+            android:textColor="@color/button_subtract_color"
+            android:textSize="@dimen/buttons_score_text_size" />
 
         <TextView
             android:id="@+id/textViewCurrentHole"
@@ -65,30 +64,30 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/textViewCurrentHole"
-            android:textSize="72sp" />
+            android:textSize="@dimen/total_score" />
 
         <Button
             android:id="@+id/buttonAdd"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/buttons_score_margins"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
             android:text="@string/buttonAddFigure"
-            android:textColor="#689F38"
-            android:textSize="48sp" />
+            android:textColor="@color/green"
+            android:textSize="@dimen/buttons_score_text_size" />
     </LinearLayout>
 
     <Button
         android:id="@+id/buttonSaveScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="@dimen/button_save_margin"
+        android:layout_marginBottom="@dimen/button_save_margin"
         android:text="@string/buttonSaveName"
         android:textColor="@color/button_save_color"
-        app:cornerRadius="50dp"
+        app:cornerRadius="@dimen/button_save_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

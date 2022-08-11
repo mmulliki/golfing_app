@@ -12,4 +12,5 @@
     <color name="gray">#FFAAAAAA</color>
     <color name="green">#FF689F38</color>
     <color name="button_save_color">#FF212121</color>
+    <color name="button_subtract_color">#FFFF0000</color>
 </resources>
