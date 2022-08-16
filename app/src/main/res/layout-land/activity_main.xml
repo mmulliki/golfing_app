@@ -76,14 +76,15 @@
             android:textSize="@dimen/buttons_score_text_size" />
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonSaveScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/buttonSaveName"
-        android:textColor="@color/button_save_color"
-        app:cornerRadius="@dimen/button_save_corner_radius"
+        android:layout_marginEnd="@dimen/button_save_margin"
+        android:layout_marginBottom="@dimen/button_save_margin"
+        android:backgroundTint="@color/green"
+        android:src="@drawable/ic_done_checkmark"
+        app:icon="@drawable/ic_done_checkmark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/recyclerViewScoreCard" />
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,11 +23,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonSaveScore;
+    private FloatingActionButton buttonSaveScore;
     private Button buttonAdd;
     private Button buttonSubtract;
     private TextView textViewCurrentHole;
@@ -117,22 +119,22 @@ public class MainActivity extends AppCompatActivity {
                     if (isEdit) {
                         if (position == holeToUpdate) {
                             isEdit = false;
-                            buttonSaveScore.setText(getResources()
-                                    .getString(R.string.buttonSaveName));
+//                            buttonSaveScore.setText(getResources()
+//                                    .getString(R.string.buttonSaveName));
                             buttonSaveScore.setBackgroundColor(getResources()
                                     .getColor(R.color.green));
-                            buttonSaveScore.setTextColor(getResources()
-                                    .getColor(R.color.button_save_color));
+//                            buttonSaveScore.setTextColor(getResources()
+//                                    .getColor(R.color.button_save_color));
                             reverseTransDrawable.startTransition(125);
                             score.setBackground(reverseTransDrawableScore);
                             reverseTransDrawableScore.startTransition(125);
                         }
                     } else {
                         isEdit = true;
-                        buttonSaveScore.setText(getResources().getString(R.string.buttonEditName));
+//                        buttonSaveScore.setText(getResources().getString(R.string.buttonEditName));
                         buttonSaveScore.setBackgroundColor(getResources()
                                 .getColor(R.color.red_alpha));
-                        buttonSaveScore.setTextColor(getResources().getColor(R.color.white));
+//                        buttonSaveScore.setTextColor(getResources().getColor(R.color.white));
                         transitionDrawable.startTransition(125);
                         score.setBackground(transitionDrawableScore);
                         transitionDrawableScore.startTransition(125);
@@ -209,9 +211,9 @@ public class MainActivity extends AppCompatActivity {
         scoreViewModel.updateScore(position, currentScore);
         currentScore = 0;
         isEdit = false;
-        buttonSaveScore.setText(R.string.buttonSaveName);
+//        buttonSaveScore.setText(R.string.buttonSaveName);
         buttonSaveScore.setBackgroundColor(getResources().getColor(R.color.green));
-        buttonSaveScore.setTextColor(getResources().getColor(R.color.button_save_color));
+//        buttonSaveScore.setTextColor(getResources().getColor(R.color.button_save_color));
         updateUiCurrentScore();
     }
 
