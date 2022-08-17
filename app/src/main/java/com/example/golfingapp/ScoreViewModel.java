@@ -49,29 +49,52 @@ public class ScoreViewModel extends ViewModel {
         roundScores.setValue(arrayRoundScores);
     }
 
-    public void updateScore(int currentHole, int holeScore) {
+    public void updateScore(int currentHole, int holeScore, boolean isAdd) {
         // Get the old score of the current hole from the array,
         // add that to the new score of the current hole, and add
         // that to the 9/18 hole totals.
         int oldScore = arrayRoundScores.get(currentHole);
-        int scoreDifferential = oldScore - holeScore;
+
+        if (isAdd) {
+            oldScore++;
+        } else {
+            if (oldScore > 0) {
+                oldScore--;
+            }
+        }
+
+        //Set the score for the current hole
+        arrayRoundScores.set(currentHole, oldScore);
 
         if (currentHole < FRONT_TOTAL_POSITION) {
             int frontTotalScore = arrayRoundScores.get(FRONT_TOTAL_POSITION);
-            frontTotalScore -= scoreDifferential;
+//            frontTotalScore -= scoreDifferential;
+            if (isAdd) {
+                frontTotalScore++;
+            } else {
+                frontTotalScore--;
+            }
             arrayRoundScores.set(FRONT_TOTAL_POSITION, frontTotalScore);
         } else if (currentHole > FRONT_TOTAL_POSITION && currentHole < BACK_TOTAL_POSITION) {
             int backTotalScore = arrayRoundScores.get(BACK_TOTAL_POSITION);
-            backTotalScore += holeScore;
+//            backTotalScore += holeScore;
+            if (isAdd) {
+                backTotalScore++;
+            } else {
+                backTotalScore--;
+            }
             arrayRoundScores.set(BACK_TOTAL_POSITION, backTotalScore);
         }
 
         int totalScore = arrayRoundScores.get(ROUND_TOTAL_POSITION);
-        totalScore -= scoreDifferential;
-        arrayRoundScores.set(ROUND_TOTAL_POSITION, totalScore);
 
-        //Set the score for the current hole
-        arrayRoundScores.set(currentHole, holeScore);
+        if (isAdd) {
+            totalScore++;
+        } else {
+            totalScore--;
+        }
+
+        arrayRoundScores.set(ROUND_TOTAL_POSITION, totalScore);
 
         // Update the UI
         roundScores.setValue(arrayRoundScores);

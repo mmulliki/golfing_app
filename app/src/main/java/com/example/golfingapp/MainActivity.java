@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton buttonSaveScore;
     private Button buttonAdd;
     private Button buttonSubtract;
+    private Button buttonArrowLeft;
+    private Button buttonArrowRight;
     private TextView textViewCurrentHole;
     private TextView textViewTotalScore;
     private int currentScore;
@@ -54,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         buttonSaveScore = findViewById(R.id.buttonSaveScore);
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonSubtract = findViewById(R.id.buttonSubtract);
+        buttonArrowLeft = findViewById(R.id.buttonArrowLeft);
+        buttonArrowRight = findViewById(R.id.buttonArrowRight);
         textViewCurrentHole = findViewById(R.id.textViewCurrentHole);
         textViewTotalScore = findViewById(R.id.textViewTotalScore);
 
@@ -149,14 +153,35 @@ public class MainActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeCurrentScore(view);
+                changeCurrentScore(view, scoreViewModel);
             }
         });
 
         buttonSubtract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeCurrentScore(view);
+                changeCurrentScore(view, scoreViewModel);
+            }
+        });
+
+        buttonArrowLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (currentHole > 0) {
+                    currentHole--;
+                }
+                Log.d("ArrowButtons", "Current hole: " + currentHole);
+            }
+        });
+
+        buttonArrowRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (currentHole < 17) {
+                    currentHole++;
+                }
+                Log.d("ArrowButtons", "Current hole: " + currentHole);
+
             }
         });
 
@@ -164,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isEdit) {
-                    updateScore(scoreViewModel, holeToUpdate);
+//                    updateScore(scoreViewModel, holeToUpdate);
                 } else {
                     saveScore(scoreViewModel);
                 }
@@ -181,15 +206,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void changeCurrentScore(View view) {
+    public void changeCurrentScore(View view, ScoreViewModel scoreViewModel) {
+        boolean isAdd = false;
         if (view.getId() == buttonAdd.getId()) {
             currentScore++;
+            isAdd = true;
         } else {
             if (currentScore > 0) {
                 currentScore--;
+                isAdd = false;
             }
         }
-        updateUiCurrentScore();
+        updateScore(scoreViewModel, currentHole, isAdd);
+//        updateUiCurrentScore();
     }
 
     public void saveScore(ScoreViewModel scoreViewModel) {
@@ -202,19 +231,19 @@ public class MainActivity extends AppCompatActivity {
             currentScore = 0;
             currentHole++;
 
-            updateUiCurrentScore();
+//            updateUiCurrentScore();
         }
 
     }
 
-    public void updateScore(ScoreViewModel scoreViewModel, int position) {
-        scoreViewModel.updateScore(position, currentScore);
+    public void updateScore(ScoreViewModel scoreViewModel, int position, boolean isAdd) {
+        scoreViewModel.updateScore(position, currentScore, isAdd);
         currentScore = 0;
         isEdit = false;
 //        buttonSaveScore.setText(R.string.buttonSaveName);
         buttonSaveScore.setBackgroundColor(getResources().getColor(R.color.green));
 //        buttonSaveScore.setTextColor(getResources().getColor(R.color.button_save_color));
-        updateUiCurrentScore();
+//        updateUiCurrentScore();
     }
 
     public void updateUiCurrentScore() {
