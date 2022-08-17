@@ -58,14 +58,6 @@
             android:textColor="@color/button_subtract_color"
             android:textSize="@dimen/buttons_score_text_size" />
 
-        <TextView
-            android:id="@+id/textViewCurrentHole"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/textViewCurrentHole"
-            android:textSize="@dimen/total_score" />
-
         <Button
             android:id="@+id/buttonAdd"
             style="?android:attr/borderlessButtonStyle"
@@ -77,6 +69,25 @@
             android:text="@string/buttonAddFigure"
             android:textColor="@color/green"
             android:textSize="@dimen/buttons_score_text_size" />
+
+        <Button
+            android:id="@+id/buttonArrowLeft"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/buttons_score_margins"
+            android:layout_weight="1"
+            android:foreground="@drawable/ic_arrow_left" />
+
+        <Button
+            android:id="@+id/buttonArrowRight"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/buttons_score_margins"
+            android:layout_weight="1"
+            android:foreground="@drawable/ic_arrow_right" />
+
     </LinearLayout>
 
 
