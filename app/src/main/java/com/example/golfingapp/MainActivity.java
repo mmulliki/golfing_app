@@ -153,14 +153,16 @@ public class MainActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeCurrentScore(view, scoreViewModel);
+//                changeCurrentScore(view, scoreViewModel);
+                scoreViewModel.updateScore(currentHole, true);
             }
         });
 
         buttonSubtract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeCurrentScore(view, scoreViewModel);
+                scoreViewModel.updateScore(currentHole, false);
+//                changeCurrentScore(view, scoreViewModel);
             }
         });
 
@@ -212,12 +214,13 @@ public class MainActivity extends AppCompatActivity {
             currentScore++;
             isAdd = true;
         } else {
+            isAdd = false;
             if (currentScore > 0) {
                 currentScore--;
                 isAdd = false;
             }
         }
-        updateScore(scoreViewModel, currentHole, isAdd);
+//        updateScore(scoreViewModel, currentHole, isAdd);
 //        updateUiCurrentScore();
     }
 
@@ -237,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateScore(ScoreViewModel scoreViewModel, int position, boolean isAdd) {
-        scoreViewModel.updateScore(position, currentScore, isAdd);
+//        scoreViewModel.updateScore(position, currentScore, isAdd);
         currentScore = 0;
         isEdit = false;
 //        buttonSaveScore.setText(R.string.buttonSaveName);
