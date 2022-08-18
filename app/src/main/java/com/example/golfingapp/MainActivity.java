@@ -30,7 +30,6 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FloatingActionButton buttonSaveScore;
     private Button buttonAdd;
     private Button buttonSubtract;
     private Button buttonArrowLeft;
@@ -54,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        buttonSaveScore = findViewById(R.id.buttonSaveScore);
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonSubtract = findViewById(R.id.buttonSubtract);
         buttonArrowLeft = findViewById(R.id.buttonArrowLeft);
@@ -91,66 +89,6 @@ public class MainActivity extends AppCompatActivity {
         scoreViewModel.getAllScores().observe(this, scoreObserver);
 
         //Set up listeners
-        scoreAdapter.setOnItemClickListener(new ClickListener() {
-            private Drawable[] drawableArray = new Drawable[3];
-            private Drawable[] reverseArray = new Drawable[3];
-
-            @Override
-            public void onItemClick(View v, int position) {
-                TextView score = v.findViewById(R.id.textViewScore);
-
-                drawableArray[0] = ResourcesCompat.getDrawable(v.getResources(),
-                        R.drawable.on_transition_background, v.getContext().getTheme());
-                drawableArray[1] = ResourcesCompat.getDrawable(v.getResources(),
-                        R.drawable.on_edit_background, v.getContext().getTheme());
-                TransitionDrawable transitionDrawable =
-                        new TransitionDrawable(drawableArray);
-                TransitionDrawable transitionDrawableScore =
-                        new TransitionDrawable(drawableArray);
-                reverseArray[0] = ResourcesCompat.getDrawable(v.getResources(),
-                        R.drawable.on_transition_background, v.getContext().getTheme());
-                reverseArray[1] = ResourcesCompat.getDrawable(v.getResources(),
-                        R.drawable.border, v.getContext().getTheme());
-                TransitionDrawable reverseTransDrawable =
-                        new TransitionDrawable(reverseArray);
-                TransitionDrawable reverseTransDrawableScore =
-                        new TransitionDrawable(reverseArray);
-
-                // If scorecard is not in edit mode, change button to "Edit" mode and turn on
-                // edit mode, set the current position to update. Otherwise, turn off edit mode,
-                // and set the button text to Save.
-                // Restrict clicks to holes, not total.
-                if (position != 9 && position < 19) {
-                    if (isEdit) {
-                        if (position == holeToUpdate) {
-                            isEdit = false;
-//                            buttonSaveScore.setText(getResources()
-//                                    .getString(R.string.buttonSaveName));
-                            buttonSaveScore.setBackgroundColor(getResources()
-                                    .getColor(R.color.green));
-//                            buttonSaveScore.setTextColor(getResources()
-//                                    .getColor(R.color.button_save_color));
-                            reverseTransDrawable.startTransition(125);
-                            score.setBackground(reverseTransDrawableScore);
-                            reverseTransDrawableScore.startTransition(125);
-                        }
-                    } else {
-                        isEdit = true;
-//                        buttonSaveScore.setText(getResources().getString(R.string.buttonEditName));
-                        buttonSaveScore.setBackgroundColor(getResources()
-                                .getColor(R.color.red_alpha));
-//                        buttonSaveScore.setTextColor(getResources().getColor(R.color.white));
-                        transitionDrawable.startTransition(125);
-                        score.setBackground(transitionDrawableScore);
-                        transitionDrawableScore.startTransition(125);
-
-                        holeToUpdate = position;
-                    }
-                }
-//                updateScore(scoreViewModel, position);
-            }
-        });
-
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -183,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 //Set previous hole background to white
                 View oldView = Objects.requireNonNull(recyclerViewScoreCard.getLayoutManager())
                         .findViewByPosition(currentHole);
+                assert oldView != null;
                 TextView oldScore = oldView.findViewById(R.id.textViewScore);
                 oldScore.setBackground(getResources().getDrawable(R.drawable.border));
 
@@ -199,16 +138,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonSaveScore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isEdit) {
-//                    updateScore(scoreViewModel, holeToUpdate);
-                } else {
-                    saveScore(scoreViewModel);
-                }
-            }
-        });
     }
 
     @Override
@@ -218,51 +147,6 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(KEY_CURRENT_SCORE, currentScore);
         outState.putInt(KEY_CURRENT_HOLE, currentHole);
 
-    }
-
-    public void changeCurrentScore(View view, ScoreViewModel scoreViewModel) {
-        boolean isAdd = false;
-        if (view.getId() == buttonAdd.getId()) {
-            currentScore++;
-            isAdd = true;
-        } else {
-            isAdd = false;
-            if (currentScore > 0) {
-                currentScore--;
-                isAdd = false;
-            }
-        }
-//        updateScore(scoreViewModel, currentHole, isAdd);
-//        updateUiCurrentScore();
-    }
-
-    public void saveScore(ScoreViewModel scoreViewModel) {
-        if (currentScore == 0 && !isEdit) {
-            String message = getResources().getString(R.string.toastValidScoreMessage);
-            Toast.makeText(this, message,
-                    Toast.LENGTH_SHORT).show();
-        } else if (currentHole < 18) {
-            scoreViewModel.addScore(currentHole, currentScore);
-            currentScore = 0;
-            currentHole++;
-
-//            updateUiCurrentScore();
-        }
-
-    }
-
-    public void updateScore(ScoreViewModel scoreViewModel, int position, boolean isAdd) {
-//        scoreViewModel.updateScore(position, currentScore, isAdd);
-        currentScore = 0;
-        isEdit = false;
-//        buttonSaveScore.setText(R.string.buttonSaveName);
-        buttonSaveScore.setBackgroundColor(getResources().getColor(R.color.green));
-//        buttonSaveScore.setTextColor(getResources().getColor(R.color.button_save_color));
-//        updateUiCurrentScore();
-    }
-
-    public void updateUiCurrentScore() {
-        textViewCurrentHole.setText(String.valueOf(currentScore));
     }
 
     private static class ScoreHolder extends RecyclerView.ViewHolder {
