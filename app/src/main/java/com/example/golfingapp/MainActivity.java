@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -179,11 +180,22 @@ public class MainActivity extends AppCompatActivity {
         buttonArrowRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Set previous hole background to white
+                View oldView = Objects.requireNonNull(recyclerViewScoreCard.getLayoutManager())
+                        .findViewByPosition(currentHole);
+                TextView oldScore = oldView.findViewById(R.id.textViewScore);
+                oldScore.setBackground(getResources().getDrawable(R.drawable.border));
+
                 if (currentHole < 17) {
                     currentHole++;
                 }
-                Log.d("ArrowButtons", "Current hole: " + currentHole);
 
+                //Set current hole background to red
+                View v = Objects.requireNonNull(recyclerViewScoreCard.getLayoutManager())
+                        .findViewByPosition(currentHole);
+                assert v != null;
+                TextView score = v.findViewById(R.id.textViewScore);
+                score.setBackground(getResources().getDrawable(R.drawable.on_edit_background));
             }
         });
 
