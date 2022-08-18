@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(GRID_LAYOUT_SPAN,
                 StaggeredGridLayoutManager.VERTICAL);
         recyclerViewScoreCard.setLayoutManager(layoutManager);
-        ScoreAdapter scoreAdapter = new ScoreAdapter();
+        ScoreAdapter scoreAdapter = new ScoreAdapter(this, currentHole);
         recyclerViewScoreCard.setAdapter(scoreAdapter);
 
         final Observer<ArrayList<Integer>> scoreObserver = new Observer<ArrayList<Integer>>() {
@@ -153,13 +154,17 @@ public class MainActivity extends AppCompatActivity {
         private TextView label;
         private TextView score;
         private ConstraintLayout constraintLayoutHole;
+        private int currentHole;
+        private Drawable onEditBackground;
 
-        public ScoreHolder(@NonNull View itemView) {
+        public ScoreHolder(Drawable onEditBackground, @NonNull View itemView, int currentHole) {
             super(itemView);
 
             label = itemView.findViewById(R.id.textViewLabel);
             score = itemView.findViewById(R.id.textViewScore);
             constraintLayoutHole = itemView.findViewById(R.id.constraintLayoutHolder);
+            this.currentHole = currentHole;
+            this.onEditBackground = onEditBackground;
         }
 
         public void bindHoleScore(Integer score, int position, ClickListener clickListener) {
@@ -194,12 +199,22 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+            if (position == currentHole + 1) {
+                this.score.setBackground(onEditBackground);
+            }
         }
     }
 
     private static class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
         private ArrayList<Integer> arrayScores;
         private static ClickListener clickListener;
+        private int currentHole;
+        private Drawable onEditBackground;
+
+        public ScoreAdapter(Context context, int currentHole) {
+            this.currentHole = currentHole;
+            onEditBackground = context.getResources().getDrawable(R.drawable.on_edit_background);
+        }
 
         public void setScoreList(ArrayList<Integer> arrayScores) {
             this.arrayScores = arrayScores;
@@ -213,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
 
             View object = inflater.inflate(R.layout.hole_layout, parent, false);
 
-            return new ScoreHolder(object);
+            return new ScoreHolder(onEditBackground, object, currentHole);
         }
 
         @Override
@@ -228,6 +243,10 @@ public class MainActivity extends AppCompatActivity {
 
         public void setOnItemClickListener(ClickListener clickListener) {
             ScoreAdapter.clickListener = clickListener;
+        }
+
+        public void setCurrentHole(int currentHole) {
+            this.currentHole = currentHole;
         }
     }
 
