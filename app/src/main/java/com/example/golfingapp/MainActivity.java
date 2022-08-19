@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String BACK_TOTAL_LABEL = "In";
     private static final String ROUND_TOTAL_LABEL = "Total";
     private static final int GRID_LAYOUT_SPAN= 10;
+    private static final int FRONT_NINE_LABEL_POSITION = 9;
+    private static final int BACK_NINE_LABEL_POSITION = 19;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,33 +111,18 @@ public class MainActivity extends AppCompatActivity {
         buttonArrowLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (currentHole > 0) {
-                    currentHole--;
-                }
-                Log.d("ArrowButtons", "Current hole: " + currentHole);
+                changeCurrentHoleBackground(view);
+//                if (currentHole > 0) {
+//                    currentHole--;
+//                }
+//                Log.d("ArrowButtons", "Current hole: " + currentHole);
             }
         });
 
         buttonArrowRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Set previous hole background to white
-                View oldView = Objects.requireNonNull(recyclerViewScoreCard.getLayoutManager())
-                        .findViewByPosition(currentHole);
-                assert oldView != null;
-                TextView oldScore = oldView.findViewById(R.id.textViewScore);
-                oldScore.setBackground(getResources().getDrawable(R.drawable.border));
-
-                if (currentHole < 17) {
-                    currentHole++;
-                }
-
-                //Set current hole background to red
-                View v = Objects.requireNonNull(recyclerViewScoreCard.getLayoutManager())
-                        .findViewByPosition(currentHole);
-                assert v != null;
-                TextView score = v.findViewById(R.id.textViewScore);
-                score.setBackground(getResources().getDrawable(R.drawable.on_edit_background));
+                changeCurrentHoleBackground(view);
             }
         });
 
@@ -148,6 +135,36 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(KEY_CURRENT_SCORE, currentScore);
         outState.putInt(KEY_CURRENT_HOLE, currentHole);
 
+    }
+
+    public void changeCurrentHoleBackground(View view) {
+        //Set previous hole background to white
+        View oldView = Objects.requireNonNull(recyclerViewScoreCard.getLayoutManager())
+                .findViewByPosition(currentHole);
+        assert oldView != null;
+        TextView oldScore = oldView.findViewById(R.id.textViewScore);
+        oldScore.setBackground(getResources().getDrawable(R.drawable.border));
+
+        //Increase or decrease the current hole, according to button pressed
+        if (view.getId() == R.id.buttonArrowRight) {
+            if (currentHole < BACK_NINE_LABEL_POSITION) {
+                currentHole++;
+            }
+        } else {
+            if (currentHole > 0) {
+                currentHole--;
+            }
+        }
+
+        //Set current hole background to red
+        if (currentHole != FRONT_NINE_LABEL_POSITION &&
+                currentHole != BACK_NINE_LABEL_POSITION) {
+            View v = Objects.requireNonNull(recyclerViewScoreCard.getLayoutManager())
+                    .findViewByPosition(currentHole);
+            assert v != null;
+            TextView score = v.findViewById(R.id.textViewScore);
+            score.setBackground(getResources().getDrawable(R.drawable.on_edit_background));
+        }
     }
 
     private static class ScoreHolder extends RecyclerView.ViewHolder {
