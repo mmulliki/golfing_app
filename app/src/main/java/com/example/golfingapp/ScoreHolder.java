@@ -1,6 +1,7 @@
 package com.example.golfingapp;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,18 +19,20 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
     private static final String BACK_TOTAL_LABEL = "In";
     private static final String ROUND_TOTAL_LABEL = "Total";
 
-    public ScoreHolder(Drawable onEditBackground, @NonNull View itemView, int currentHole) {
+    public ScoreHolder(Drawable onEditBackground, @NonNull View itemView) {
         super(itemView);
 
         label = itemView.findViewById(R.id.textViewLabel);
         score = itemView.findViewById(R.id.textViewScore);
         constraintLayoutHole = itemView.findViewById(R.id.constraintLayoutHolder);
-        this.currentHole = currentHole;
         this.onEditBackground = onEditBackground;
     }
 
-    public void bindHoleScore(Integer score, int position, MainActivity.ClickListener clickListener) {
+    public void bindHoleScore(Integer score, int position, int currentHole,
+                              MainActivity.ClickListener clickListener) {
         position++;
+        this.currentHole = currentHole;
+        Log.d("AdapterTest", "currentHole: " + currentHole + " position: " + position);
 
         if (position < 10) {
             String tempPosition = " " + position;
@@ -59,7 +62,7 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
                 clickListener.onItemClick(view, getAdapterPosition());
             }
         });
-
+        Log.d("AdapterTest", "currentHole: " + currentHole);
         if (position == currentHole + 1) {
             this.score.setBackground(onEditBackground);
         }

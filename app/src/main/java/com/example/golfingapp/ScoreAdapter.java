@@ -32,18 +32,18 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
     @Override
     public ScoreHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("AdapterTest", "Called onCreateViewHolder" +
-                "currentHole: " + currentHole);
+                " currentHole: " + currentHole);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         View object = inflater.inflate(R.layout.hole_layout, parent, false);
 
-        return new ScoreHolder(onEditBackground, object, currentHole);
+        return new ScoreHolder(onEditBackground, object);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ScoreHolder holder, int position) {
         Log.d("AdapterTest", "Called onBindViewHolder");
-        holder.bindHoleScore(arrayScores.get(position), position, clickListener);
+        holder.bindHoleScore(arrayScores.get(position), position, currentHole, clickListener);
     }
 
     @Override

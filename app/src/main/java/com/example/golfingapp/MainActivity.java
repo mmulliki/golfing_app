@@ -44,9 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewScoreCard;
     private static final String KEY_CURRENT_SCORE = "key_current_score";
     private static final String KEY_CURRENT_HOLE = "key_current_hole";
-    private static final String FRONT_TOTAL_LABEL = "Ot";
-    private static final String BACK_TOTAL_LABEL = "In";
-    private static final String ROUND_TOTAL_LABEL = "Total";
     private static final int GRID_LAYOUT_SPAN= 10;
     private static final int FRONT_NINE_LABEL_POSITION = 9;
     private static final int BACK_NINE_LABEL_POSITION = 19;
@@ -96,14 +93,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                changeCurrentScore(view, scoreViewModel);
-                scoreViewModel.updateScore(currentHole, true);
+                scoreViewModel.updateScore(scoreAdapter, currentHole, true);
             }
         });
 
         buttonSubtract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                scoreViewModel.updateScore(currentHole, false);
+                scoreViewModel.updateScore(scoreAdapter, currentHole, false);
 //                changeCurrentScore(view, scoreViewModel);
             }
         });

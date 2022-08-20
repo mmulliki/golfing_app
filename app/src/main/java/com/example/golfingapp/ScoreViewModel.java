@@ -27,7 +27,7 @@ public class ScoreViewModel extends ViewModel {
         return roundScores;
     }
 
-    public void updateScore(int currentHole, boolean isAdd) {
+    public void updateScore(ScoreAdapter scoreAdapter, int currentHole, boolean isAdd) {
         //Get the score from the current hole. If the Add button has been clicked,
         //increase the score by one. Otherwise, decrease the score.
         int oldScore = arrayRoundScores.get(currentHole);
@@ -84,6 +84,7 @@ public class ScoreViewModel extends ViewModel {
         arrayRoundScores.set(ROUND_TOTAL_POSITION, totalScore);
 
         // Update the UI
+        scoreAdapter.setCurrentHole(currentHole);
         roundScores.setValue(arrayRoundScores);
     }
 
