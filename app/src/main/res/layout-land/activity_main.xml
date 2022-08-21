@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/recycler_view_socrecard_margin"
-        android:layout_marginBottom="@dimen/recycler_view_socrecard_margin"
+        app:layout_constraintBottom_toTopOf="@id/scoreSelectorLayout"
         app:layout_constraintEnd_toStartOf="@+id/textViewTotalScoreLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/textViewTotalScoreLabel" />
@@ -42,6 +42,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewScoreCard">
 
@@ -56,14 +57,6 @@
             android:textColor="@color/button_subtract_color"
             android:textSize="@dimen/buttons_score_text_size" />
 
-        <TextView
-            android:id="@+id/textViewCurrentHole"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="@string/textViewCurrentHole"
-            android:textSize="@dimen/total_score" />
-
         <Button
             android:id="@+id/buttonAdd"
             style="?android:attr/borderlessButtonStyle"
@@ -74,6 +67,25 @@
             android:text="@string/buttonAddFigure"
             android:textColor="@color/green"
             android:textSize="@dimen/buttons_score_text_size" />
+
+        <Button
+            android:id="@+id/buttonArrowLeft"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/buttons_score_margins"
+            android:layout_weight="1"
+            android:foreground="@drawable/ic_arrow_left" />
+
+        <Button
+            android:id="@+id/buttonArrowRight"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/buttons_score_margins"
+            android:layout_weight="1"
+            android:foreground="@drawable/ic_arrow_right" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSubtract = findViewById(R.id.buttonSubtract);
         buttonArrowLeft = findViewById(R.id.buttonArrowLeft);
         buttonArrowRight = findViewById(R.id.buttonArrowRight);
-        textViewCurrentHole = findViewById(R.id.textViewCurrentHole);
+//        textViewCurrentHole = findViewById(R.id.textViewCurrentHole);
         textViewTotalScore = findViewById(R.id.textViewTotalScore);
         border = AppCompatResources.getDrawable(this, R.drawable.border);
         onEditBackground = AppCompatResources
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             currentScore = savedInstanceState.getInt(KEY_CURRENT_SCORE);
             currentHole = savedInstanceState.getInt(KEY_CURRENT_HOLE);
-            textViewCurrentHole.setText(String.valueOf(currentScore));
+//            textViewCurrentHole.setText(String.valueOf(currentScore));
         }
 
         //Set up ViewModel
