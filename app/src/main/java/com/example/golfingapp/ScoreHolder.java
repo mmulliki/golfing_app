@@ -10,13 +10,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ScoreHolder extends RecyclerView.ViewHolder {
-    private TextView label;
-    private TextView score;
-    private ConstraintLayout constraintLayoutHole;
+    private final TextView label;
+    private final TextView score;
+    private final ConstraintLayout constraintLayoutHole;
     private int currentHole;
-    private int thisPosition;
-    private Drawable onEditBackground;
-    private Drawable border;
+    private final Drawable onEditBackground;
+    private final Drawable border;
     private static final String FRONT_TOTAL_LABEL = "Ot";
     private static final String BACK_TOTAL_LABEL = "In";
     private static final String ROUND_TOTAL_LABEL = "Total";
@@ -33,11 +32,9 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
 
     public void bindHoleScore(Integer score, int position, int currentHole,
                               MainActivity.ClickListener clickListener) {
-        thisPosition = position;
+        int thisPosition = position;
         thisPosition++;
         this.currentHole = currentHole;
-        Log.d("AdapterTest", "currentHole: " + currentHole +
-                " thisPosition: " + thisPosition);
 
         if (thisPosition < 10) {
             String tempPosition = " " + thisPosition;
@@ -67,10 +64,8 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
                 clickListener.onItemClick(view, getAdapterPosition());
             }
         });
-        Log.d("AdapterTest", "currentHole: " + currentHole);
+
         if (thisPosition == currentHole + 1) {
-            Log.d("AdapterTest", "Inside Holder IF. currentHole: " +
-                    currentHole + " thisPosition: " + thisPosition);
             this.score.setBackground(onEditBackground);
         } else {
             this.score.setBackground(border);

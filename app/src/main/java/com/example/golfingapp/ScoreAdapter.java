@@ -17,12 +17,11 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
     private ArrayList<Integer> arrayScores;
     private static MainActivity.ClickListener clickListener;
     private int currentHole;
-    private Drawable onEditBackground;
-    private Drawable border;
+    private final Drawable onEditBackground;
+    private final Drawable border;
 
     public ScoreAdapter(Context context, int currentHole) {
         this.currentHole = currentHole;
-//        onEditBackground = context.getResources().getDrawable(R.drawable.on_edit_background);
         onEditBackground = ResourcesCompat.getDrawable(context.getResources(),
                 R.drawable.on_edit_background, context.getTheme());
         border = ResourcesCompat.getDrawable(context.getResources(),
@@ -37,8 +36,6 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
     @NonNull
     @Override
     public ScoreHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("AdapterTest", "Called onCreateViewHolder" +
-                " currentHole: " + currentHole);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         View object = inflater.inflate(R.layout.hole_layout, parent, false);
@@ -48,7 +45,6 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ScoreHolder holder, int position) {
-        Log.d("AdapterTest", "Called onBindViewHolder");
         holder.bindHoleScore(arrayScores.get(position), position, currentHole, clickListener);
     }
 

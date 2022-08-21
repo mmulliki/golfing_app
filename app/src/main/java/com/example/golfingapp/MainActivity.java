@@ -36,12 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonSubtract;
     private Button buttonArrowLeft;
     private Button buttonArrowRight;
-    private TextView textViewCurrentHole;
     private TextView textViewTotalScore;
     private int currentScore;
     private int currentHole;
-    private boolean isEdit = false;
-    private int holeToUpdate;
     private RecyclerView recyclerViewScoreCard;
     private static final String KEY_CURRENT_SCORE = "key_current_score";
     private static final String KEY_CURRENT_HOLE = "key_current_hole";
@@ -60,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         buttonSubtract = findViewById(R.id.buttonSubtract);
         buttonArrowLeft = findViewById(R.id.buttonArrowLeft);
         buttonArrowRight = findViewById(R.id.buttonArrowRight);
-//        textViewCurrentHole = findViewById(R.id.textViewCurrentHole);
         textViewTotalScore = findViewById(R.id.textViewTotalScore);
         border = AppCompatResources.getDrawable(this, R.drawable.border);
         onEditBackground = AppCompatResources
@@ -69,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             currentScore = savedInstanceState.getInt(KEY_CURRENT_SCORE);
             currentHole = savedInstanceState.getInt(KEY_CURRENT_HOLE);
-//            textViewCurrentHole.setText(String.valueOf(currentScore));
         }
 
         //Set up ViewModel
@@ -98,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                changeCurrentScore(view, scoreViewModel);
                 scoreViewModel.updateScore(scoreAdapter, currentHole, true);
             }
         });
@@ -165,15 +159,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        Log.d("onArrowClick", "currentHole: " + currentHole);
+
         //Set current hole background to red
-        if (currentHole != FRONT_NINE_LABEL_POSITION &&
-                currentHole != BACK_NINE_LABEL_POSITION) {
+        if (currentHole != BACK_NINE_LABEL_POSITION) {
             View v = Objects.requireNonNull(recyclerViewScoreCard.getLayoutManager())
                     .findViewByPosition(currentHole);
             assert v != null;
             TextView score = v.findViewById(R.id.textViewScore);
-            Log.d("onArrowClick", "Entered IF for setBackground");
+
             score.setBackground(onEditBackground);
         }
     }
