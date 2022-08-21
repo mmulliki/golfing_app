@@ -151,10 +151,18 @@ public class MainActivity extends AppCompatActivity {
         if (view.getId() == R.id.buttonArrowRight) {
             if (currentHole < BACK_NINE_LABEL_POSITION - 1) {
                 currentHole++;
+
+                if (currentHole == FRONT_NINE_LABEL_POSITION) {
+                    currentHole++;
+                }
             }
         } else {
             if (currentHole > 0) {
                 currentHole--;
+
+                if (currentHole == FRONT_NINE_LABEL_POSITION) {
+                    currentHole--;
+                }
             }
         }
         Log.d("onArrowClick", "currentHole: " + currentHole);
