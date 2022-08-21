@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -17,10 +18,15 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
     private static MainActivity.ClickListener clickListener;
     private int currentHole;
     private Drawable onEditBackground;
+    private Drawable border;
 
     public ScoreAdapter(Context context, int currentHole) {
         this.currentHole = currentHole;
-        onEditBackground = context.getResources().getDrawable(R.drawable.on_edit_background);
+//        onEditBackground = context.getResources().getDrawable(R.drawable.on_edit_background);
+        onEditBackground = ResourcesCompat.getDrawable(context.getResources(),
+                R.drawable.on_edit_background, context.getTheme());
+        border = ResourcesCompat.getDrawable(context.getResources(),
+                R.drawable.border, context.getTheme());
     }
 
     public void setScoreList(ArrayList<Integer> arrayScores) {
@@ -37,7 +43,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreHolder> {
 
         View object = inflater.inflate(R.layout.hole_layout, parent, false);
 
-        return new ScoreHolder(onEditBackground, object);
+        return new ScoreHolder(border, onEditBackground, object);
     }
 
     @Override

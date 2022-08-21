@@ -16,17 +16,19 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
     private int currentHole;
     private int thisPosition;
     private Drawable onEditBackground;
+    private Drawable border;
     private static final String FRONT_TOTAL_LABEL = "Ot";
     private static final String BACK_TOTAL_LABEL = "In";
     private static final String ROUND_TOTAL_LABEL = "Total";
 
-    public ScoreHolder(Drawable onEditBackground, @NonNull View itemView) {
+    public ScoreHolder(Drawable border, Drawable onEditBackground, @NonNull View itemView) {
         super(itemView);
 
         label = itemView.findViewById(R.id.textViewLabel);
         score = itemView.findViewById(R.id.textViewScore);
         constraintLayoutHole = itemView.findViewById(R.id.constraintLayoutHolder);
         this.onEditBackground = onEditBackground;
+        this.border = border;
     }
 
     public void bindHoleScore(Integer score, int position, int currentHole,
@@ -70,6 +72,8 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
             Log.d("AdapterTest", "Inside Holder IF. currentHole: " +
                     currentHole + " thisPosition: " + thisPosition);
             this.score.setBackground(onEditBackground);
+        } else {
+            this.score.setBackground(border);
         }
     }
 }
