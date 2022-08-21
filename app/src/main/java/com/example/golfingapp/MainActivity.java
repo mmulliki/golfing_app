@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.content_mail);
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonSubtract = findViewById(R.id.buttonSubtract);
         buttonArrowLeft = findViewById(R.id.buttonArrowLeft);
