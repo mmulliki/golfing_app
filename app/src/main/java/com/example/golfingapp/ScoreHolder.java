@@ -54,6 +54,9 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
                 String tempString = " " + score;
                 this.score.setText(tempString);
             } else {
+                if (score > 99) {
+                    this.score.setTextSize(R.dimen.three_digit_text_size);
+                }
                 this.score.setText(String.valueOf(score));
             }
         }

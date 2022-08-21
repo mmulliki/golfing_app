@@ -33,7 +33,9 @@ public class ScoreViewModel extends ViewModel {
         int oldScore = arrayRoundScores.get(currentHole);
 
         if (isAdd) {
-            oldScore++;
+            if (oldScore < 99) {
+                oldScore++;
+            }
         } else {
             if (oldScore > 0) {
                 oldScore--;
@@ -48,7 +50,9 @@ public class ScoreViewModel extends ViewModel {
         if (currentHole < FRONT_TOTAL_POSITION) {
             int frontTotalScore = arrayRoundScores.get(FRONT_TOTAL_POSITION);
             if (isAdd) {
-                frontTotalScore++;
+                if (frontTotalScore < 99) {
+                    frontTotalScore++;
+                }
             } else {
                 if (frontTotalScore > 0) {
                     frontTotalScore--;
@@ -59,7 +63,9 @@ public class ScoreViewModel extends ViewModel {
         } else if (currentHole > FRONT_TOTAL_POSITION && currentHole < BACK_TOTAL_POSITION) {
             int backTotalScore = arrayRoundScores.get(BACK_TOTAL_POSITION);
             if (isAdd) {
-                backTotalScore++;
+                if (backTotalScore < 99) {
+                    backTotalScore++;
+                }
             } else {
                 if (backTotalScore > 0) {
                     backTotalScore--;
