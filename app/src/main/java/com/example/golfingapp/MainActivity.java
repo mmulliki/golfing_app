@@ -19,6 +19,7 @@ import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -131,6 +132,12 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(KEY_CURRENT_SCORE, currentScore);
         outState.putInt(KEY_CURRENT_HOLE, currentHole);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
     }
 
     public void changeCurrentHoleBackground(View view) {
