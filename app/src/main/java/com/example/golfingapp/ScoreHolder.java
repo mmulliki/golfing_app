@@ -14,6 +14,7 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
     private TextView score;
     private ConstraintLayout constraintLayoutHole;
     private int currentHole;
+    private int thisPosition;
     private Drawable onEditBackground;
     private static final String FRONT_TOTAL_LABEL = "Ot";
     private static final String BACK_TOTAL_LABEL = "In";
@@ -30,22 +31,24 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
 
     public void bindHoleScore(Integer score, int position, int currentHole,
                               MainActivity.ClickListener clickListener) {
-        position++;
+        thisPosition = position;
+        thisPosition++;
         this.currentHole = currentHole;
-        Log.d("AdapterTest", "currentHole: " + currentHole + " position: " + position);
+        Log.d("AdapterTest", "currentHole: " + currentHole +
+                " thisPosition: " + thisPosition);
 
-        if (position < 10) {
-            String tempPosition = " " + position;
+        if (thisPosition < 10) {
+            String tempPosition = " " + thisPosition;
             label.setText(tempPosition);
 
             String tempScore = " " + score;
             this.score.setText(tempScore);
         } else {
-            switch (position) {
+            switch (thisPosition) {
                 case 10: label.setText(FRONT_TOTAL_LABEL); break;
                 case 20: label.setText(BACK_TOTAL_LABEL); break;
                 case 21: label.setText(ROUND_TOTAL_LABEL); break;
-                default: label.setText(String.valueOf(position - 1));
+                default: label.setText(String.valueOf(thisPosition - 1));
 
             }
             if (score < 10) {
@@ -63,9 +66,9 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
             }
         });
         Log.d("AdapterTest", "currentHole: " + currentHole);
-        if (position == currentHole + 1) {
+        if (thisPosition == currentHole + 1) {
             Log.d("AdapterTest", "Inside Holder IF. currentHole: " +
-                    currentHole + " position: " + position);
+                    currentHole + " thisPosition: " + thisPosition);
             this.score.setBackground(onEditBackground);
         }
     }
