@@ -106,8 +106,9 @@ public class MainActivity extends AppCompatActivity {
         buttonSubtract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                scoreViewModel.updateScore(scoreAdapter, currentHole, false);
-//                changeCurrentScore(view, scoreViewModel);
+                if (scoreViewModel.getCurrentHoleScore(currentHole) != 0) {
+                    scoreViewModel.updateScore(scoreAdapter, currentHole, false);
+                }
             }
         });
 
@@ -115,10 +116,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 changeCurrentHoleBackground(view);
-//                if (currentHole > 0) {
-//                    currentHole--;
-//                }
-//                Log.d("ArrowButtons", "Current hole: " + currentHole);
             }
         });
 

@@ -91,4 +91,8 @@ public class ScoreViewModel extends ViewModel {
     public int getTotalScore() {
         return arrayRoundScores.get(ROUND_TOTAL_POSITION);
     }
+
+    public int getCurrentHoleScore(int currentHole) {
+        return arrayRoundScores.get(currentHole);
+    }
 }
