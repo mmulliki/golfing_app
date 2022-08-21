@@ -64,6 +64,8 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
         });
         Log.d("AdapterTest", "currentHole: " + currentHole);
         if (position == currentHole + 1) {
+            Log.d("AdapterTest", "Inside Holder IF. currentHole: " +
+                    currentHole + " position: " + position);
             this.score.setBackground(onEditBackground);
         }
     }

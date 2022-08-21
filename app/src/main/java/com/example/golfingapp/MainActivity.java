@@ -2,6 +2,7 @@ package com.example.golfingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.Observer;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int GRID_LAYOUT_SPAN= 10;
     private static final int FRONT_NINE_LABEL_POSITION = 9;
     private static final int BACK_NINE_LABEL_POSITION = 19;
+    private static Drawable border;
+    private static Drawable onEditBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         buttonArrowRight = findViewById(R.id.buttonArrowRight);
         textViewCurrentHole = findViewById(R.id.textViewCurrentHole);
         textViewTotalScore = findViewById(R.id.textViewTotalScore);
+        border = AppCompatResources.getDrawable(this, R.drawable.border);
+        onEditBackground = AppCompatResources
+                .getDrawable(this, R.drawable.on_edit_background);
 
         if (savedInstanceState != null) {
             currentScore = savedInstanceState.getInt(KEY_CURRENT_SCORE);
@@ -108,7 +114,9 @@ public class MainActivity extends AppCompatActivity {
         buttonArrowLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeCurrentHoleBackground(view);
+                if (currentHole < BACK_NINE_LABEL_POSITION - 1) {
+                    changeCurrentHoleBackground(view);
+                }
 //                if (currentHole > 0) {
 //                    currentHole--;
 //                }
@@ -140,11 +148,10 @@ public class MainActivity extends AppCompatActivity {
                 .findViewByPosition(currentHole);
         assert oldView != null;
         TextView oldScore = oldView.findViewById(R.id.textViewScore);
-        oldScore.setBackground(getResources().getDrawable(R.drawable.border));
-
+        oldScore.setBackground(border);
         //Increase or decrease the current hole, according to button pressed
         if (view.getId() == R.id.buttonArrowRight) {
-            if (currentHole < BACK_NINE_LABEL_POSITION) {
+            if (currentHole < BACK_NINE_LABEL_POSITION - 1) {
                 currentHole++;
             }
         } else {
@@ -152,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 currentHole--;
             }
         }
-
+        Log.d("onArrowClick", "currentHole: " + currentHole);
         //Set current hole background to red
         if (currentHole != FRONT_NINE_LABEL_POSITION &&
                 currentHole != BACK_NINE_LABEL_POSITION) {
@@ -160,7 +167,8 @@ public class MainActivity extends AppCompatActivity {
                     .findViewByPosition(currentHole);
             assert v != null;
             TextView score = v.findViewById(R.id.textViewScore);
-            score.setBackground(getResources().getDrawable(R.drawable.on_edit_background));
+            Log.d("onArrowClick", "Entered IF for setBackground");
+            score.setBackground(onEditBackground);
         }
     }
 
