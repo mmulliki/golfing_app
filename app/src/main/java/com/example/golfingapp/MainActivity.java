@@ -114,9 +114,7 @@ public class MainActivity extends AppCompatActivity {
         buttonArrowLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (currentHole < BACK_NINE_LABEL_POSITION - 1) {
-                    changeCurrentHoleBackground(view);
-                }
+                changeCurrentHoleBackground(view);
 //                if (currentHole > 0) {
 //                    currentHole--;
 //                }
@@ -127,7 +125,9 @@ public class MainActivity extends AppCompatActivity {
         buttonArrowRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeCurrentHoleBackground(view);
+                if (currentHole < BACK_NINE_LABEL_POSITION - 1) {
+                    changeCurrentHoleBackground(view);
+                }
             }
         });
 
@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
         assert oldView != null;
         TextView oldScore = oldView.findViewById(R.id.textViewScore);
         oldScore.setBackground(border);
+
         //Increase or decrease the current hole, according to button pressed
         if (view.getId() == R.id.buttonArrowRight) {
             if (currentHole < BACK_NINE_LABEL_POSITION - 1) {
