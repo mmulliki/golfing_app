@@ -101,4 +101,12 @@ public class ScoreViewModel extends ViewModel {
     public int getCurrentHoleScore(int currentHole) {
         return arrayRoundScores.get(currentHole);
     }
+
+    public void resetScore() {
+        for (int i = LOOP_START_VALUE; i < LOOP_END_VALUE; i++) {
+            arrayRoundScores.set(i, 0);
+        }
+        roundScores.setValue(arrayRoundScores);
+
+    }
 }

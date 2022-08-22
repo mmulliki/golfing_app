@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentScore;
     private int currentHole;
     private RecyclerView recyclerViewScoreCard;
+    private ScoreViewModel scoreViewModel;
     private static final String KEY_CURRENT_SCORE = "key_current_score";
     private static final String KEY_CURRENT_HOLE = "key_current_hole";
     private static final int GRID_LAYOUT_SPAN= 10;
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Set up ViewModel
-        ScoreViewModel scoreViewModel = new ViewModelProvider(this)
+        scoreViewModel = new ViewModelProvider(this)
                 .get(ScoreViewModel.class);
 
         //Set up RecyclerView
@@ -138,6 +140,18 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_reset) {
+            resetScore();
+        }
+        return true;
+    }
+
+    private void resetScore() {
+        scoreViewModel.resetScore();
     }
 
     public void changeCurrentHoleBackground(View view) {
