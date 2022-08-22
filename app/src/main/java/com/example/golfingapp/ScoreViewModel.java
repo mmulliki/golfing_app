@@ -102,10 +102,11 @@ public class ScoreViewModel extends ViewModel {
         return arrayRoundScores.get(currentHole);
     }
 
-    public void resetScore() {
+    public void resetScore(ScoreAdapter scoreAdapter) {
         for (int i = LOOP_START_VALUE; i < LOOP_END_VALUE; i++) {
             arrayRoundScores.set(i, 0);
         }
+        scoreAdapter.setCurrentHole(0);
         roundScores.setValue(arrayRoundScores);
 
     }

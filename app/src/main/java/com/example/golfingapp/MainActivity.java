@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentHole;
     private RecyclerView recyclerViewScoreCard;
     private ScoreViewModel scoreViewModel;
+    private ScoreAdapter scoreAdapter;
     private static final String KEY_CURRENT_SCORE = "key_current_score";
     private static final String KEY_CURRENT_HOLE = "key_current_hole";
     private static final int GRID_LAYOUT_SPAN= 10;
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(GRID_LAYOUT_SPAN,
                 StaggeredGridLayoutManager.VERTICAL);
         recyclerViewScoreCard.setLayoutManager(layoutManager);
-        ScoreAdapter scoreAdapter = new ScoreAdapter(this, currentHole);
+        scoreAdapter = new ScoreAdapter(this, currentHole);
         recyclerViewScoreCard.setAdapter(scoreAdapter);
 
         final Observer<ArrayList<Integer>> scoreObserver = new Observer<ArrayList<Integer>>() {
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetScore() {
-        scoreViewModel.resetScore();
+        scoreViewModel.resetScore(scoreAdapter);
     }
 
     public void changeCurrentHoleBackground(View view) {
