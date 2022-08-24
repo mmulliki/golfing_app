@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ScoreHolder extends RecyclerView.ViewHolder {
     private final TextView label;
     private final TextView score;
-    private final ConstraintLayout constraintLayoutHole;
+//    private final ConstraintLayout constraintLayoutHole;
     private int currentHole;
     private final Drawable onEditBackground;
     private final Drawable border;
@@ -25,7 +25,7 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
 
         label = itemView.findViewById(R.id.textViewLabel);
         score = itemView.findViewById(R.id.textViewScore);
-        constraintLayoutHole = itemView.findViewById(R.id.constraintLayoutHolder);
+//        constraintLayoutHole = itemView.findViewById(R.id.constraintLayoutHolder);
         this.onEditBackground = onEditBackground;
         this.border = border;
     }
@@ -61,12 +61,12 @@ public class ScoreHolder extends RecyclerView.ViewHolder {
             }
         }
 
-        constraintLayoutHole.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickListener.onItemClick(view, getAdapterPosition());
-            }
-        });
+//        constraintLayoutHole.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                clickListener.onItemClick(view, getAdapterPosition());
+//            }
+//        });
 
         if (thisPosition == currentHole + 1) {
             this.score.setBackground(onEditBackground);
