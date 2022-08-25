@@ -10,4 +10,8 @@
     <string name="hole_1">1</string>
     <string name="textViewTotalLabel">Total</string>
     <string name="total_score_label">Total score</string>
+    <string name="button_player_one">Player1</string>
+    <string name="button_player_two">Player2</string>
+    <string name="button_player_three">Player3</string>
+    <string name="button_player_four">Player4</string>
 </resources>

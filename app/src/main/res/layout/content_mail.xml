@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/recycler_view_socrecard_margin"
-        app:layout_constraintBottom_toTopOf="@+id/scoreSelectorLayout"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPlayerOne"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewTotalScore" />
@@ -36,6 +36,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewTotalScoreLabel" />
 
+    <Button
+        android:id="@+id/buttonPlayerOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_player_one"
+        android:textSize="@dimen/button_player_text_size"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toTopOf="@+id/scoreSelectorLayout"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPlayerTwo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewScoreCard" />
+
+    <Button
+        android:id="@+id/buttonPlayerTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_player_two"
+        android:textSize="@dimen/button_player_text_size"
+
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toTopOf="@+id/scoreSelectorLayout"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPlayerThree"
+        app:layout_constraintStart_toEndOf="@+id/buttonPlayerOne"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewScoreCard" />
+
+    <Button
+        android:id="@+id/buttonPlayerThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_player_three"
+        android:textSize="@dimen/button_player_text_size"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toTopOf="@+id/scoreSelectorLayout"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPlayerFour"
+        app:layout_constraintStart_toEndOf="@+id/buttonPlayerTwo"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewScoreCard" />
+
+    <Button
+        android:id="@+id/buttonPlayerFour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_player_four"
+        android:textSize="@dimen/button_player_text_size"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toTopOf="@+id/scoreSelectorLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonPlayerThree"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewScoreCard" />
+
     <LinearLayout
         android:id="@+id/scoreSelectorLayout"
         android:layout_width="match_parent"
@@ -45,7 +94,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewScoreCard">
+        app:layout_constraintTop_toBottomOf="@+id/buttonPlayerOne">
 
         <Button
             android:id="@+id/buttonSubtract"
