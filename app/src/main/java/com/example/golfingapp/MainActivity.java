@@ -51,12 +51,20 @@ public class MainActivity extends AppCompatActivity {
     private static final int BACK_NINE_LABEL_POSITION = 19;
     private static Drawable border;
     private static Drawable onEditBackground;
+    private Button buttonPlayerOne;
+    private Button buttonPlayerTwo;
+    private Button buttonPlayerThree;
+    private Button buttonPlayerFour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.content_mail);
+        buttonPlayerOne = findViewById(R.id.buttonPlayerOne);
+        buttonPlayerTwo = findViewById(R.id.buttonPlayerTwo);
+        buttonPlayerThree = findViewById(R.id.buttonPlayerThree);
+        buttonPlayerFour = findViewById(R.id.buttonPlayerFour);
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonSubtract = findViewById(R.id.buttonSubtract);
         buttonArrowLeft = findViewById(R.id.buttonArrowLeft);
@@ -126,6 +134,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        buttonPlayerOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scoreViewModel.changeDisplayedPlayer(1);
+            }
+        });
+
+        buttonPlayerTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scoreViewModel.changeDisplayedPlayer(2);
+            }
+        });
     }
 
     @Override

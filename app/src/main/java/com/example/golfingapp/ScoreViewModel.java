@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class ScoreViewModel extends ViewModel {
     private ArrayList<Integer> arrayRoundScores = new ArrayList<Integer>();
+    private ArrayList<Integer> playerOneScores = new ArrayList<>();
     private MutableLiveData<ArrayList<Integer>> roundScores = new MutableLiveData<>();
     private static final int LOOP_START_VALUE = 0;
     private static final int LOOP_END_VALUE = 21;
@@ -20,6 +21,7 @@ public class ScoreViewModel extends ViewModel {
         for (int i = LOOP_START_VALUE; i < LOOP_END_VALUE; i++) {
             arrayRoundScores.add(0);
         }
+        playerOneScores.addAll(arrayRoundScores);
         roundScores.setValue(arrayRoundScores);
     }
 
@@ -109,5 +111,13 @@ public class ScoreViewModel extends ViewModel {
         scoreAdapter.setCurrentHole(0);
         roundScores.setValue(arrayRoundScores);
 
+    }
+
+    public void changeDisplayedPlayer(int buttonID) {
+        if (buttonID == 1) {
+            roundScores.setValue(playerOneScores);
+        } else {
+            roundScores.setValue(arrayRoundScores);
+        }
     }
 }
