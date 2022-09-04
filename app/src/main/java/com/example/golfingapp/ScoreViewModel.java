@@ -1,5 +1,6 @@
 package com.example.golfingapp;
 
+import android.os.Handler;
 import android.view.View;
 
 import androidx.lifecycle.MutableLiveData;
@@ -18,11 +19,12 @@ public class ScoreViewModel extends ViewModel {
     private static final int ROUND_TOTAL_POSITION = 20;
 
     public ScoreViewModel() {
-        for (int i = LOOP_START_VALUE; i < LOOP_END_VALUE; i++) {
-            arrayRoundScores.add(0);
-        }
+//        for (int i = LOOP_START_VALUE; i < LOOP_END_VALUE; i++) {
+//            arrayRoundScores.add(0);
+//        }
+        setRoundScores();
         playerOneScores.addAll(arrayRoundScores);
-        roundScores.setValue(arrayRoundScores);
+//        roundScores.setValue(arrayRoundScores);
     }
 
     public MutableLiveData<ArrayList<Integer>> getAllScores() {
@@ -120,4 +122,19 @@ public class ScoreViewModel extends ViewModel {
             roundScores.setValue(arrayRoundScores);
         }
     }
+
+    public void setRoundScores() {
+        Handler responseHandler = new Handler();
+
+        ResetArrayThread resetArrayThread = new ResetArrayThread(arrayRoundScores, roundScores,
+                responseHandler);
+        resetArrayThread.start();
+        resetArrayThread.getLooper();
+        while (resetArrayThread.getRequestHandler() == null) {
+
+        }
+        resetArrayThread.queueResetHT();
+        resetArrayThread.quitSafely();
+    }
+
 }
